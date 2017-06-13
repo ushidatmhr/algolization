@@ -1,0 +1,27 @@
+{
+  "name": "algo",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ushidatmhr/AlogrithmVisualization.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/ushidatmhr/AlogrithmVisualization/issues"
+  },
+  "homepage": "https://github.com/ushidatmhr/AlogrithmVisualization#readme",
+  "dependencies": {
+    "gulp": "^3.9.1",
+    "gulp-ejs": "^3.0.1",
+    "gulp-less": "^3.3.0",
+    "gulp-typescript": "^3.1.7",
+    "gulp-watch": "^4.3.11",
+    "typescript": "^2.3.4"
+  }
+}
