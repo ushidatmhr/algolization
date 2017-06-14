@@ -10,8 +10,7 @@ AlogrithmVisualization/
 │  ├ ts/
 │  └ template/
 │
-└ dist/
-   └ algo/
-      ├ css
-      ├ js
-      └ ...
+└ docs/
+   ├ css/
+   ├ js/
+   └ ...
