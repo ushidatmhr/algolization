@@ -9,7 +9,7 @@ var rimraf = require('rimraf');
 var runSequence = require('run-sequence');
 
 const APP_DIR = './app';
-const DIST_DIR = './dist/algo';
+const DIST_DIR = './docs';
 
 const LESS_DIR = APP_DIR + '/less';
 const TS_DIR = APP_DIR + '/ts';
