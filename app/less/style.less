@@ -1,0 +1,185 @@
+@import url(http://fonts.googleapis.com/earlyaccess/notosansjp.css);
+
+@width-sp-max: 767px;
+@width-md-min: 768px;
+
+body {
+    font-family: 'Noto Sans JP', sans-serif;
+    font-size: 100%;
+    margin: 0 0 50px 0;
+}
+
+h1 {
+    margin: 0;
+}
+
+a, a:hover {
+    color: inherit;
+    text-decoration: none;
+}
+
+.btn {
+    height: 34px;
+    padding: 0 20px;
+    font-family: inherit;
+    border: none;
+    border-radius: 2px;
+    background: rgba(158, 158, 158, .2);
+    box-shadow: 
+        0 2px 2px 0 rgba(0, 0, 0, .14),
+        0 3px 1px -2px rgba(0, 0, 0, .2),
+        0 1px 5px 0 rgba(0, 0, 0, .12);
+    outline: none;
+
+    &:focus {
+        border: none;
+    }
+
+    &.btn-cmd {
+        background: #B3E5FC;
+    }
+}
+
+.speed-togggle {
+    background-color: #18FFFF;
+    box-shadow: 
+        0 2px 2px 0 rgba(0, 0, 0, .14),
+        0 3px 1px -2px rgba(0, 0, 0, .2),
+        0 1px 5px 0 rgba(0, 0, 0, .12);
+    width: 50px;
+    display: inline-block;
+    text-align: center;
+
+    &.active {
+        background-color: #00E5FF;
+        box-shadow: 
+            0 2px 2px 0 rgba(0, 0, 0, 0.14)
+    }
+
+    input[type="radio"] {
+        clip: rect(0,0,0,0);
+        position: absolute;
+    }
+}
+
+header {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 217px;
+    background-color: #304FFE;
+    color: #ffffff;
+
+    h1.title {
+        font-size: 350%;
+        text-align: center;
+        font-weight: lighter;
+    }
+
+    &.head {
+        flex-direction: row;
+        justify-content: flex-start;
+        height: 66px;
+        padding: 0 20px;
+        margin-bottom: 20px;
+
+        h1 {
+            font-size: 170%;
+        }
+    }
+}
+
+main {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    
+    &.main section {
+        margin: 42px 0;
+
+        @media (min-width: 501px) {
+            width: 500px;
+        }
+
+        @media (max-width: 500px) {
+            width: auto;
+        }
+        
+        h2 {
+            font-weight: normal;
+            
+            :lang(ja) {
+                font-size: 90%;
+            }
+        }
+        
+        ul.menu>li {
+            margin-bottom: 16px;
+            
+            a:hover {
+                color: #aaaaaa;
+            }
+        }
+    }
+
+     @media (max-width: @width-sp-max) {
+         * {
+             width: 100%;
+         }
+    }
+}
+
+.cmds {
+    display: flex;
+    flex-direction: row;
+
+    @media (min-width: @width-md-min) {
+        justify-content: space-around;
+        align-items: center;
+        width: 350px;
+    }
+
+    @media (max-width: @width-sp-max) {
+        width: 100%;
+
+        * {
+            flex-grow: 1;
+        }
+    }
+}
+
+.section-datanum {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.counter {
+    background: inherit;
+    border: 1px solid #3f51b5;
+    border-radius: 50%;
+    height: 40px;
+    width: 40px;
+    margin: 0 6px;
+    font-size: 150%;
+    color: #3f51b5;
+    outline: none;
+
+    &.count-num {
+        font-size: 97%
+    }
+}
+
+.data-num {
+    border: none;
+    text-align: center;
+    width: 81px;
+    font-size: 200%;
+}
+
+.speed-range {
+    width: 200px;
+    margin: 0 10px;
+}
