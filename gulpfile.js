@@ -48,8 +48,10 @@ gulp.task('ts', function () {
  * ejsコンパイル
  */
 gulp.task('ejs', function () {
-    return gulp.src(EJS_DIR + '/**/*.ejs')
-        .pipe(ejs({}, { ext: '.html', base: 'template' }))
+    return gulp.src([EJS_DIR + '/**/*.ejs', '!' + EJS_DIR + '/parts/**/*.ejs'])
+        .pipe(ejs({
+            baseDir : process.cwd() + '/' + EJS_DIR
+        }, { ext: '.html', base: 'template' }))
         .pipe(rename({extname: '.html'}))
         .pipe(gulp.dest(DIST_DIR));
 });
