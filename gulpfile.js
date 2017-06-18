@@ -15,6 +15,10 @@ const LESS_DIR = APP_DIR + '/less';
 const TS_DIR = APP_DIR + '/ts';
 const EJS_DIR = APP_DIR + '/template';
 
+const CONTEXTPATH = {
+    local : '',
+    prod : '/AlogrithmVisualization'
+}
 
 /**
  * lessコンパイル
@@ -50,7 +54,9 @@ gulp.task('ts', function () {
 gulp.task('ejs', function () {
     return gulp.src([EJS_DIR + '/**/*.ejs', '!' + EJS_DIR + '/parts/**/*.ejs'])
         .pipe(ejs({
-            baseDir : process.cwd() + '/' + EJS_DIR
+            baseDir : process.cwd() + '/' + EJS_DIR,
+            contextpath : CONTEXTPATH.prod,
+            version : '201706190810'
         }, { ext: '.html', base: 'template' }))
         .pipe(rename({extname: '.html'}))
         .pipe(gulp.dest(DIST_DIR));
