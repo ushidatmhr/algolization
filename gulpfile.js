@@ -55,8 +55,8 @@ gulp.task('ejs', function () {
     return gulp.src([EJS_DIR + '/**/*.ejs', '!' + EJS_DIR + '/parts/**/*.ejs'])
         .pipe(ejs({
             baseDir : process.cwd() + '/' + EJS_DIR,
-            contextpath : CONTEXTPATH.prod,
-            version : '201706190810'
+            contextpath : CONTEXTPATH.local,
+            version : Date.now()
         }, { ext: '.html', base: 'template' }))
         .pipe(rename({extname: '.html'}))
         .pipe(gulp.dest(DIST_DIR));
