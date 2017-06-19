@@ -5,7 +5,9 @@
     <title>バブルソート - buble sort</title>
     <script>
         window.onload = function() {
-            sort = new BubleSort('pixi-area');
+            sort = new BubleSort('pixi-area', function() {
+                SortUI.autoSwitch(false);
+            });
 
             var dataNum = window.sessionStorage.getItem('data-num');
             if (!dataNum) {
@@ -49,7 +51,7 @@
             <button class="counter count-num" onclick="SortUI.counter(10)">+10</button>
         </section>
 
-        <section class="" style="margin-top: 20px;">
+        <section class="section-datanum" style="margin-top: 20px;">
             速度：
             <label class="speed-togggle active">
                 <input type="radio" value="1" name="speed" onchange="SortUI.speed(this)" checked/>×1

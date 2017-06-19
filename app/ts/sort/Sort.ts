@@ -16,6 +16,8 @@ abstract class Sort {
         maxHeight: 430
     }
 
+    protected callback: () => void;
+
     protected speed: number;
 
     protected data: {
@@ -30,9 +32,11 @@ abstract class Sort {
     }
 
 
-    constructor(id: string) {
+    constructor(id: string, callback: () => void) {
         this.app = new PIXI.Application(854, 480, { backgroundColor: 0x424242 });
         document.getElementById(id).appendChild(this.app.view);
+        
+        this.callback = callback;
     }
 
 
@@ -175,6 +179,7 @@ abstract class Sort {
             for (var i = 0; i < self.speed; i++) {
                 if (!self.next()) {
                     self.app.ticker.stop();
+                    self.callback();
                     return;
                 }
             }

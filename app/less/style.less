@@ -1,4 +1,4 @@
-@import url(http://fonts.googleapis.com/earlyaccess/notosansjp.css);
+@import url(https://fonts.googleapis.com/earlyaccess/notosansjp.css);
 
 @width-sp-max: 767px;
 @width-md-min: 768px;
@@ -6,6 +6,7 @@
 body {
     font-family: 'Noto Sans JP', sans-serif;
     font-size: 100%;
+    overflow-x: hidden;
     margin: 0 0 50px 0;
 }
 
@@ -125,7 +126,7 @@ main {
     }
 
      @media (max-width: @width-sp-max) {
-         * {
+         &>* {
              width: 100%;
          }
     }
