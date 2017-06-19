@@ -104,6 +104,11 @@ main.main section ul.menu > li a:hover {
     width: 100%;
   }
 }
+@media (max-width: 767px) {
+  #pixi-area canvas {
+    width: 100%;
+  }
+}
 .cmds {
   display: flex;
   flex-direction: row;

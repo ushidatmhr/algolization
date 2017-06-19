@@ -4,9 +4,9 @@
     <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1.0,user-scalable=no" />
 <link href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css" rel="stylesheet">
-<link rel="stylesheet" type="text/css" href="/AlogrithmVisualization/css/style.css?_1497885893540" />
+<link rel="stylesheet" type="text/css" href="/AlogrithmVisualization/css/style.css?_1497887165151" />
 <script src="https://cdnjs.cloudflare.com/ajax/libs/pixi.js/4.5.1/pixi.min.js"></script>
-<script type="text/javascript" src="/AlogrithmVisualization/js/script.js?_1497885893540"></script>
+<script type="text/javascript" src="/AlogrithmVisualization/js/script.js?_1497887165151"></script>
     <title>バブルソート - buble sort</title>
     <script>
         window.onload = function() {
@@ -44,7 +44,7 @@
         <section>
             <div class="cmds">
                 <button id="next" class="btn btn-cmd" onclick="SortUI.next()">Next</button>
-                <button id="auto" class="btn btn-cmd" value="on" onclick="SortUI.autoSwitch()">
+                <button id="auto" class="btn btn-cmd" value="on" onclick="SortUI.autoSwitch(this.value)">
                     <i class="fa fa-play" aria-hidden="true"></i> Auto
                 </button>
                 <button id="reset" class="btn btn-cmd" onclick="SortUI.reset()">Reset</button>
@@ -102,12 +102,11 @@
                     this._dataNumTxt.value = num;
                     window.sessionStorage.setItem('data-num', num);
 
-
                     this.reset();
                 },
 
-                autoSwitch: function() {
-                    if (this._autoBtn.value == 'on') {
+                autoSwitch: function(value) {
+                    if (value == 'on') {
                         this._autoBtn.innerHTML = '<i class="fa fa-pause" aria-hidden="true"></i> Auto';
                         this._autoBtn.value = 'off';
 
@@ -127,6 +126,7 @@
 
                 reset: function() {
                     sort.reset(this._dataNumTxt.value);
+                    this.autoSwitch('off');
                 },
 
                 speed: function(radio) {
