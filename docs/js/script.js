@@ -8,9 +8,8 @@ var __extends = (this && this.__extends) || (function () {
         d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
     };
 })();
-var a = 0;
 var Sort = (function () {
-    function Sort(id) {
+    function Sort(id, callback) {
         /** オプション */
         this.options = {
             /** 余白 */
@@ -28,6 +27,7 @@ var Sort = (function () {
         };
         this.app = new PIXI.Application(854, 480, { backgroundColor: 0x424242 });
         document.getElementById(id).appendChild(this.app.view);
+        this.callback = callback;
     }
     /**
      * 1プロセス実行
@@ -130,6 +130,7 @@ var Sort = (function () {
             for (var i = 0; i < self.speed; i++) {
                 if (!self.next()) {
                     self.app.ticker.stop();
+                    self.callback();
                     return;
                 }
             }
@@ -177,8 +178,8 @@ var BubleSortState;
 })(BubleSortState || (BubleSortState = {}));
 var BubleSort = (function (_super) {
     __extends(BubleSort, _super);
-    function BubleSort(id) {
-        return _super.call(this, id) || this;
+    function BubleSort(id, callback) {
+        return _super.call(this, id, callback) || this;
     }
     /**
      * クリア

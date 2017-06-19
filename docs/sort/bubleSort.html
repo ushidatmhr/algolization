@@ -2,15 +2,17 @@
 <html>
 <head>
     <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width,initial-scale=1.0" />
+<meta name="viewport" content="width=device-width,initial-scale=1.0,user-scalable=no" />
 <link href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css" rel="stylesheet">
-<link rel="stylesheet" type="text/css" href="/AlogrithmVisualization/css/style.css?_201706190810" />
+<link rel="stylesheet" type="text/css" href="/AlogrithmVisualization/css/style.css?_1497885893540" />
 <script src="https://cdnjs.cloudflare.com/ajax/libs/pixi.js/4.5.1/pixi.min.js"></script>
-<script type="text/javascript" src="/AlogrithmVisualization/js/script.js?_201706190810"></script>
+<script type="text/javascript" src="/AlogrithmVisualization/js/script.js?_1497885893540"></script>
     <title>バブルソート - buble sort</title>
     <script>
         window.onload = function() {
-            sort = new BubleSort('pixi-area');
+            sort = new BubleSort('pixi-area', function() {
+                SortUI.autoSwitch(false);
+            });
 
             var dataNum = window.sessionStorage.getItem('data-num');
             if (!dataNum) {
@@ -27,7 +29,7 @@
   
     <header class="head">
     <h1 class="title">
-        <a href="/">Algorithm Visualization</a>
+        <a href="/AlogrithmVisualization/">Algorithm Visualization</a>
     </h1>
 </header>
 
@@ -58,7 +60,7 @@
             <button class="counter count-num" onclick="SortUI.counter(10)">+10</button>
         </section>
 
-        <section class="" style="margin-top: 20px;">
+        <section class="section-datanum" style="margin-top: 20px;">
             速度：
             <label class="speed-togggle active">
                 <input type="radio" value="1" name="speed" onchange="SortUI.speed(this)" checked/>×1
