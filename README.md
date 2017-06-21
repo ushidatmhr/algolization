@@ -1,7 +1,7 @@
 # AlogrithmVisualization
 アルゴリズム可視化のwebサイト
 
-https://ushidatmhr.github.io/AlogrithmVisualization/
+~~https://ushidatmhr.github.io/AlogrithmVisualization/~~
 
 https://algolization.firebaseapp.com/
 
