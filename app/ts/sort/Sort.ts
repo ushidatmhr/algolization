@@ -32,20 +32,28 @@ abstract class Sort {
     }
 
 
-    constructor(id: string, callback: () => void) {
+    constructor(id: string) {
         this.app = new PIXI.Application(854, 480, { backgroundColor: 0x424242 });
         document.getElementById(id).appendChild(this.app.view);
-        
-        this.callback = callback;
     }
 
 
     /**
      * 1プロセス実行
      */
-    protected update() {
+    public update() {
         this.speed = 1;
         this.app.ticker.update();
+    }
+
+
+    public setSpeed(speed: number) {
+        this.speed = speed;
+    }
+
+
+    public setCallbackAutoFinished(callback: () => void) {
+        this.callback = callback;
     }
 
 
@@ -199,6 +207,14 @@ abstract class Sort {
         } else {
             this.app.ticker.stop();
         }
+    }
+
+
+    /**
+     * オート実行中の場合、trueを返す
+     */
+    public isAuto(): boolean {
+        return this.app.ticker.started;
     }
 
 

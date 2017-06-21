@@ -18,8 +18,8 @@ class BubleSort extends Sort {
     /** ソート完了済みの位置を保持 */
     private sortedIndex: number;
 
-    constructor(id: string, callback: () => void) {
-        super(id, callback);
+    constructor(id: string) {
+        super(id);
     }
 
 

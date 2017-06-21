@@ -1,0 +1,31 @@
+<section>
+    <div class="cmds">
+        <button id="next-btn" class="btn btn-cmd">Next</button>
+        <button id="auto" class="btn btn-cmd" value="on">
+            <i class="fa fa-play" aria-hidden="true"></i> Auto
+        </button>
+        <button id="reset" class="btn btn-cmd">Reset</button>
+    </div>
+</section>
+
+<section class="section-datanum" style="margin-top: 20px; text-align: center;">
+    データ数：
+    <button name="counterBtn" value="-10" class="counter count-num">-10</button>
+    <button name="counterBtn" value="-1" class="counter">-</button>
+    <input type="text" id="data-num" value="10" class="data-num" readonly />
+    <button name="counterBtn" value="1" class="counter">+</button>
+    <button name="counterBtn" value="10" class="counter count-num">+10</button>
+</section>
+
+<section class="section-datanum" style="margin-top: 20px;">
+    速度：
+    <label class="speed-togggle active">
+        <input type="radio" value="1" name="speed" checked/>×1
+    </label>
+    <label class="speed-togggle">
+        <input type="radio" value="10" name="speed" />×10
+    </label>
+    <label class="speed-togggle">
+        <input type="radio" value="100" name="speed" />×100
+    </label>
+</section>
