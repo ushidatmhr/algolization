@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <%- include(baseDir + '/parts/head') %>
+    <title>選択ソート - selected sort</title>
+    <script>
+        window.onload = function () {
+            new SortManager(new SelectedSort('pixi-area', {}));
+        }
+    </script>
+</head>
+<body>
+  
+    <%- include(baseDir + '/parts/header_menu') %>
+
+    <main>
+        <section>
+        
+            <div id="pixi-area">
+        
+            </div>
+        </section>
+
+        <%- include(baseDir + '/parts/sort/sort_controller') %>
+    </main>
+  
+</body>
+</html>

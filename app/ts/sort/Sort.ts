@@ -32,9 +32,34 @@ abstract class Sort {
     }
 
 
+    protected colorFilter: {
+        active: any,
+        point: any
+    }
+
+
     constructor(id: string) {
         this.app = new PIXI.Application(854, 480, { backgroundColor: 0x424242 });
         document.getElementById(id).appendChild(this.app.view);
+
+        this.initColorFilter();
+    }
+
+
+    /**
+     * カラーフィルタを初期化する
+     */
+    private initColorFilter() {
+        var active = new PIXI.filters.ColorMatrixFilter();
+        active.matrix = [1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 1];
+
+        var point = new PIXI.filters.ColorMatrixFilter();
+        point.matrix = [0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 1];
+
+        this.colorFilter = {
+            active: active,
+            point: point
+        }
     }
 
 
@@ -222,6 +247,7 @@ abstract class Sort {
      * 指定のグラフィックをアクティブの色へ変更
      * 
      * @param index
+     * @deprecated
      */
     protected active(index: number) {
         var blackfilter = new PIXI.filters.ColorMatrixFilter();
@@ -234,8 +260,19 @@ abstract class Sort {
      * 指定のグラフィックのアクティブ色を削除
      * 
      * @param index 
+     * @deprecated
      */
     protected inactive(index: number) {
+        this.data[index].graphic.filters = [];
+    }
+
+
+    protected setColorFilter(index: number, colorFilter: any) {
+        this.data[index].graphic.filters = [colorFilter];
+    }
+
+
+    protected clearColorFilter(index: number){
         this.data[index].graphic.filters = [];
     }
 }

@@ -78,8 +78,8 @@ class BubleSort extends Sort {
     private nextCursor() {
 
         if (-1 < this.cursor) {
-            this.inactive(this.cursor);
-            this.inactive(this.cursor + 1);
+            this.clearColorFilter(this.cursor);
+            this.clearColorFilter(this.cursor + 1);
         }
 
         this.cursor++;
@@ -97,8 +97,8 @@ class BubleSort extends Sort {
             }
         }
 
-        this.active(this.cursor);
-        this.active(this.cursor + 1);
+        this.setColorFilter(this.cursor, this.colorFilter.active);
+        this.setColorFilter(this.cursor + 1, this.colorFilter.active);
 
 
         if (this.compare(this.cursor, this.cursor + 1)) {
