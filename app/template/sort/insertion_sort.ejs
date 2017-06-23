@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <%- include(baseDir + '/parts/head') %>
+    <title>挿入ソート - insertion sort</title>
+    <script>
+        window.onload = function () {
+            new SortManager(new InsertionSort('pixi-area', {}));
+        }
+    </script>
+</head>
+<body>
+  
+    <%- include(baseDir + '/parts/header_menu') %>
+
+    <main>
+        <section>
+            <h3 class="sub-title">挿入ソート - insertion sort</h3>
+            <div id="pixi-area">
+        
+            </div>
+        </section>
+
+        <%- include(baseDir + '/parts/sort/sort_controller') %>
+    </main>
+  
+</body>
+</html>
