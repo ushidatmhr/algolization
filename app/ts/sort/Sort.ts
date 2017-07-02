@@ -34,7 +34,8 @@ abstract class Sort {
 
     protected colorFilter: {
         active: any,
-        point: any
+        point: any,
+        grayOut: any
     }
 
 
@@ -56,9 +57,18 @@ abstract class Sort {
         var point = new PIXI.filters.ColorMatrixFilter();
         point.matrix = [0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 1];
 
+        var grayOut = new PIXI.filters.ColorMatrixFilter();
+        grayOut.matrix = [
+            0.7, 0, 0, 0, 0, 
+            0.7, 0, 0, 0, 0,
+            0.7, 0, 0, 0, 0,
+            1];
+
+
         this.colorFilter = {
             active: active,
-            point: point
+            point: point,
+            grayOut: grayOut
         }
     }
 
