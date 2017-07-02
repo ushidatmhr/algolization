@@ -1,5 +1,6 @@
 /// <reference path="Sort.ts" /> 
 
+
 class SortManager<T extends Sort> {
 
     private sort: T;
@@ -16,10 +17,15 @@ class SortManager<T extends Sort> {
 
     private speedRadios: NodeListOf<HTMLElement>;
 
+    // TODO
+    private SESSION_SORT_DATA_NUM = 'sort-data-num';
+
+    private SESSION_SORT_AUTO_SPEED = 'sort-auto-speed';
+
     constructor(sort: T) {
 
         // セッションストレージからデータ取得
-        var sessionDataNum = window.sessionStorage.getItem('data-num');
+        var sessionDataNum = window.sessionStorage.getItem(this.SESSION_SORT_DATA_NUM);
         if (!sessionDataNum) {
             sessionDataNum = '10';
         }
@@ -44,6 +50,24 @@ class SortManager<T extends Sort> {
         //===============
 
         this.dataNumTxt.value = sessionDataNum;
+
+        // オートスピード
+
+        var sessionAutoSpeed = window.sessionStorage.getItem(this.SESSION_SORT_AUTO_SPEED);
+        if (!sessionAutoSpeed) {
+            sessionAutoSpeed = '1';
+        }
+
+        for (var speedRadio of this.speedRadios) {
+
+            var radio = <HTMLInputElement>speedRadio;
+
+            if (radio.value == sessionAutoSpeed) {
+                radio.checked = true;
+                speedRadio.parentElement.classList.add('active');
+                this.sort.setSpeed(Number(radio.value));
+            }
+        }
 
 
         // イベント登録
@@ -84,7 +108,7 @@ class SortManager<T extends Sort> {
                 }
 
                 this.dataNumTxt.value = String(num);
-                window.sessionStorage.setItem('data-num', String(num));
+                window.sessionStorage.setItem(this.SESSION_SORT_DATA_NUM, String(num));
 
                 this.reset();
             });
@@ -100,11 +124,14 @@ class SortManager<T extends Sort> {
                     if (radio.checked) {
                         speedRadio.parentElement.classList.add('active');
                         this.sort.setSpeed(Number(radio.value));
+
+                        window.sessionStorage.setItem(this.SESSION_SORT_AUTO_SPEED, radio.value);
                     } else {
                         speedRadio.parentElement.classList.remove('active');
                     }
                 }
             });
+
         }
 
     }
