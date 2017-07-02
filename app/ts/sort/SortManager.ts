@@ -58,7 +58,7 @@ class SortManager<T extends Sort> {
             sessionAutoSpeed = '1';
         }
 
-        for (var speedRadio of this.speedRadios) {
+        for (var speedRadio of <any>this.speedRadios) {
 
             var radio = <HTMLInputElement>speedRadio;
 
@@ -95,7 +95,7 @@ class SortManager<T extends Sort> {
         });
 
         // データ数カウント
-        for (var element of this.counterBtns) {
+        for (var element of <any>this.counterBtns) {
             element.addEventListener('click', (event: HTMLElementEvent<HTMLButtonElement>) => {
                 var num = Number(this.dataNumTxt.value);
 
@@ -115,9 +115,9 @@ class SortManager<T extends Sort> {
         }
 
         // 速度
-        for (var speedRadio of this.speedRadios) {
+        for (var speedRadio of <any>this.speedRadios) {
             speedRadio.addEventListener('change', () => {
-                for (var speedRadio of this.speedRadios) {
+                for (var speedRadio of <any>this.speedRadios) {
 
                     var radio = <HTMLInputElement>speedRadio;
 
@@ -148,7 +148,7 @@ class SortManager<T extends Sort> {
             this.autoBtn.innerHTML = '<i class="fa fa-pause" aria-hidden="true"></i> Auto';
             this.autoBtn.value = 'off';
 
-            for (var speedRadio of this.speedRadios) {
+            for (var speedRadio of <any>this.speedRadios) {
                 var radio = <HTMLInputElement>speedRadio;
                 if (radio.checked) {
                     this.sort.setSpeed(Number(radio.value));
