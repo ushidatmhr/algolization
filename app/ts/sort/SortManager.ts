@@ -103,8 +103,8 @@ class SortManager<T extends Sort> {
 
                 if (num <= 1) {
                     num = 2;
-                } else if (200 < num) {
-                    num = 200;
+                } else if (1000 < num) {
+                    num = 1000;
                 }
 
                 this.dataNumTxt.value = String(num);

@@ -59,7 +59,7 @@ abstract class Sort {
 
         var grayOut = new PIXI.filters.ColorMatrixFilter();
         grayOut.matrix = [
-            0.7, 0, 0, 0, 0, 
+            0.7, 0, 0, 0, 0,
             0.7, 0, 0, 0, 0,
             0.7, 0, 0, 0, 0,
             1];
@@ -154,11 +154,18 @@ abstract class Sort {
             height: (this.app.view.height - this.options.margin) / dataNum
         }
 
+        // データ数によって枠線の色を変更
+        if (inputData.length < 271) {
+            var borderColor = 0x000000;
+        } else {
+            var borderColor = this.color.base;
+        }
+
         for (var i = 0; i < dataNum; i++) {
 
             // Graphicsを生成
             var barGraph = new PIXI.Graphics();
-            barGraph.lineStyle(1);
+            barGraph.lineStyle(1, borderColor);
             barGraph.beginFill(this.color.base, 1);
             barGraph.drawRect(0, 0, barSize.width, inputData[i] * barSize.height);
             barGraph.endFill();
@@ -282,7 +289,7 @@ abstract class Sort {
     }
 
 
-    protected clearColorFilter(index: number){
+    protected clearColorFilter(index: number) {
         this.data[index].graphic.filters = [];
     }
 }
