@@ -4,7 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "build": "webpack --config build/webpack.config.js"
   },
   "repository": {
     "type": "git",
@@ -16,16 +16,23 @@
     "url": "https://github.com/ushidatmhr/AlogrithmVisualization/issues"
   },
   "homepage": "https://github.com/ushidatmhr/AlogrithmVisualization#readme",
-  "dependencies": {
-    "gulp": "^3.9.1",
-    "gulp-ejs": "^3.0.1",
-    "gulp-less": "^3.3.0",
-    "gulp-logger": "0.0.2",
-    "gulp-rename": "^1.2.2",
-    "gulp-typescript": "^3.1.7",
-    "gulp-watch": "^4.3.11",
-    "rimraf": "^2.6.1",
-    "run-sequence": "^1.2.2",
-    "typescript": "^2.3.4"
+  "devDependencies": {
+    "@types/pixi.js": "^4.7.3",
+    "babel-loader": "^7.1.4",
+    "css-loader": "^0.28.11",
+    "ejs-html-loader": "^3.1.0",
+    "html-loader": "^0.5.5",
+    "html-webpack-plugin": "^3.2.0",
+    "node-sass": "^4.9.0",
+    "pixi.js": "^4.8.0",
+    "prettier": "^1.12.0",
+    "sass-loader": "^7.0.1",
+    "ts-loader": "^4.3.0",
+    "typescript": "^2.8.3",
+    "vue": "^2.5.16",
+    "vue-loader": "^15.2.1",
+    "vue-template-compiler": "^2.5.16",
+    "webpack": "^4.9.1",
+    "webpack-cli": "^2.1.4"
   }
 }
