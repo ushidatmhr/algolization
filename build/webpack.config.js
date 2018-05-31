@@ -6,7 +6,7 @@ module.exports = {
     mode: 'development',
     entry: {
         app: './src/app.ts',
-        sort: './src/sort/sort.ts'
+        sort: './src/sort/app-sort.ts'
     },
     output: {
         path: path.resolve(__dirname, '../public'),
@@ -32,7 +32,8 @@ module.exports = {
             },
             {
                 test: /\.tsx?$/,
-                loader: 'ts-loader'
+                loader: 'ts-loader',
+                options: { appendTsSuffixTo: [/\.vue$/] }
             },
             {
                 test: /\.js$/,
