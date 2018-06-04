@@ -1,4 +1,5 @@
 import * as PIXI from 'pixi.js'
+import DataSet from './DataSet';
 
 export default abstract class Sort {
 
@@ -6,12 +7,7 @@ export default abstract class Sort {
     protected app: PIXI.Application;
 
     /** データの集合 */
-    protected data: {
-        /** データ */
-        value: number,
-        /** グラフィック */
-        graphic: PIXI.Graphics
-    }[];
+    protected data: DataSet;
 
     /** ディスプレイオプション */
     protected displayOptions = {
@@ -32,11 +28,28 @@ export default abstract class Sort {
     }
 
 
+    /**
+     * 初期化処理
+     * @param dataNum データ数 
+     */
+    public init(dataNum: number): void {
+        this.initData(dataNum);
+    }
+
+
     public abstract next(): boolean;
 
 
-    public init(dataNum: number): void {
-        this.initData(dataNum);
+    /**
+     * リセット処理
+     * @param dataNum データ数 
+     */
+    public reset(dataNum: number): void {
+        this.data = new DataSet();
+        this.app.stage.removeChildren();
+
+        this.init(dataNum);
+        this.app.render();
     }
 
 
@@ -47,8 +60,6 @@ export default abstract class Sort {
      * @returns ランダム生成したデータのリスト
      */
     private createRandomData(dataNum: number): number[] {
-
-        this.data = [];
 
         // データ数分の配列を作成
         var array: number[] = new Array();
@@ -77,6 +88,8 @@ export default abstract class Sort {
      * @param dataNum データ数
      */
     private initData(dataNum: number): void {
+
+        this.data = new DataSet();
 
         var srcData = this.createRandomData(dataNum);
 
@@ -108,13 +121,14 @@ export default abstract class Sort {
 
 
             // データを追加
-            this.data[i] = {
+            this.data.add({
                 value: srcData[i],
                 graphic: barGraph
-            }
+            })
 
             // 画面へ追加
-            this.app.stage.addChild(this.data[i].graphic);
+            this.app.stage.addChild(this.data.get(i).graphic);
         }
     }
+
 }
