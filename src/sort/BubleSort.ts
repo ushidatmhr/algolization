@@ -48,6 +48,8 @@ export default class BubleSort extends Sort {
                 break;
         }
 
+        this.app.render();
+
         return true;
     }
 

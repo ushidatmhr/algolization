@@ -4,8 +4,7 @@
         <section>
             <button @click="next()">Next</button>
             <button @click="reset()">Reset</button>
-            <button>next</button>
-            <button>next</button>
+            <button @click="toggleAuto()">Auto</button>
         </section>
     </div>
 </template>
@@ -23,7 +22,7 @@ export default Vue.extend({
   },
   mounted() {
     sort = new BubleSort("canvas");
-    sort.init(10);
+    sort.init(100);
   },
   methods: {
     next() {
@@ -31,6 +30,9 @@ export default Vue.extend({
     },
     reset() {
       sort.reset(10);
+    },
+    toggleAuto() {
+      sort.toggleAuto();
     }
   }
 });

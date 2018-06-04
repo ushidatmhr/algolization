@@ -25,6 +25,8 @@ export default abstract class Sort {
     constructor(id: string) {
         this.app = new PIXI.Application(854, 480, { backgroundColor: 0x424242 });
         document.getElementById(id).appendChild(this.app.view);
+
+        this.initAuto();
     }
 
 
@@ -37,6 +39,22 @@ export default abstract class Sort {
     }
 
 
+    /**
+     * オート処理を初期化
+     */
+    public initAuto(): void {
+
+        this.app.ticker.autoStart = false;
+        this.app.ticker.stop();
+        this.app.ticker.update();
+        this.app.ticker.add((delta) => {
+            if (!this.next()) {
+                this.app.ticker.stop();
+            }
+        });
+    }
+
+
     public abstract next(): boolean;
 
 
@@ -45,11 +63,26 @@ export default abstract class Sort {
      * @param dataNum データ数 
      */
     public reset(dataNum: number): void {
+
+        this.app.ticker.stop();
+
         this.data = new DataSet();
         this.app.stage.removeChildren();
 
         this.init(dataNum);
         this.app.render();
+    }
+
+
+    /**
+     * オート実行を切り替える
+     */
+    public toggleAuto(): void {
+        if (this.app.ticker.started) {
+            this.app.ticker.stop();
+        } else {
+            this.app.ticker.start();
+        }
     }
 
 
@@ -129,6 +162,8 @@ export default abstract class Sort {
             // 画面へ追加
             this.app.stage.addChild(this.data.get(i).graphic);
         }
+
+        this.app.render();
     }
 
 }
