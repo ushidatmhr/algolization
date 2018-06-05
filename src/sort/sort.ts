@@ -178,4 +178,14 @@ export default abstract class Sort {
         this.app.render();
     }
 
+
+    /**
+     * 終了処理
+     */
+    public destory(): void {
+        this.app.view.parentElement.textContent = null;
+        this.app.destroy();
+        this.data = null;
+    }
+
 }

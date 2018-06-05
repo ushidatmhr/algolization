@@ -21,13 +21,18 @@
             <button @click="setFast(10)">×10</button>
             <button @click="setFast(100)">×100</button>
         </section>
+        <section>
+            <button @click="changeSort('BubleSort')">Buble</button>
+            <button @click="changeSort('InsertionSort')">Insert</button>
+        </section>
     </div>
 </template>
 
 <script lang="ts">
 import Vue from "vue";
-import BubleSort from "./BubleSort";
 import Sort from "./Sort";
+import BubleSort from "./BubleSort";
+import InsertionSort from "./InsertionSort";
 
 var sort: Sort;
 
@@ -59,6 +64,19 @@ export default Vue.extend({
     setFast(fast: number) {
       this.fast = fast;
       sort.autoSkip = this.fast;
+    },
+    changeSort(mode: string) {
+      sort.destory();
+      switch (mode) {
+        case "BubleSort":
+          sort = new BubleSort("canvas");
+          break;
+        case "InsertionSort":
+          sort = new InsertionSort("canvas");
+          break;
+      }
+
+      sort.init(this.dataNum);
     }
   }
 });
