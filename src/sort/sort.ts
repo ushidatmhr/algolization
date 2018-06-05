@@ -21,6 +21,9 @@ export default abstract class Sort {
         maxHeight: 430
     }
 
+    /** ソート処理のスキップ数 */
+    public autoSkip = 1;
+
 
     constructor(id: string) {
         this.app = new PIXI.Application(854, 480, { backgroundColor: 0x424242 });
@@ -48,14 +51,23 @@ export default abstract class Sort {
         this.app.ticker.stop();
         this.app.ticker.update();
         this.app.ticker.add((delta) => {
-            if (!this.next()) {
-                this.app.ticker.stop();
+            for (var i = 0; i < this.autoSkip; i++) {
+                if (!this.next()) {
+                    this.app.ticker.stop();
+                }
             }
         });
     }
 
 
+
     public abstract next(): boolean;
+
+
+    public update() {
+        this.autoSkip = 1;
+        this.app.ticker.update();
+    }
 
 
     /**
