@@ -9,11 +9,6 @@ type Data = {
 
 export default class DataSet {
 
-    /** 色 */
-    public static readonly COLOR = {
-        Done: 0xF50057
-    }
-
     /** カラーフィルター */
     public static colorFilters: {
         active: PIXI.filters.ColorMatrixFilter

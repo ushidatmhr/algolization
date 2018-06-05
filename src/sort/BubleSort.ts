@@ -1,5 +1,6 @@
 import Sort from './Sort'
 import DataSet from './DataSet';
+import { Color } from './ColorFilter';
 
 export default class BubleSort extends Sort {
 
@@ -71,7 +72,7 @@ export default class BubleSort extends Sort {
             // ソート完了のチェック
             if (this.sortedIndex == 1) {
                 this.process = this.STATUS.Complete;
-                this.data.setColor(0, DataSet.COLOR.Done);
+                this.data.setColor(0, Color.complete);
                 return;
             }
         }
@@ -104,6 +105,6 @@ export default class BubleSort extends Sort {
     private repeatCompare(): void {
         this.cursor = 0;
         this.sortedIndex--;
-        this.data.setColor(this.sortedIndex, DataSet.COLOR.Done);
+        this.data.setColor(this.sortedIndex, Color.complete);
     }
 }
