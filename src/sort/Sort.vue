@@ -47,7 +47,7 @@ export default Vue.extend({
   },
   mounted() {
     sort = new BubleSort("canvas");
-    sort.init(this.dataNum);
+    sort.init(this.dataNum, this.fast);
   },
   methods: {
     next() {
@@ -80,7 +80,7 @@ export default Vue.extend({
           sort = new SelectedSort("canvas");
       }
 
-      sort.init(this.dataNum);
+      sort.init(this.dataNum, this.fast);
     }
   }
 });

@@ -27,8 +27,8 @@ export default class SelectedSort extends Sort {
      * 初期化処理
      * @param dataNum 
      */
-    public init(dataNum: number) {
-        super.init(dataNum);
+    public init(dataNum: number, skip: number) {
+        super.init(dataNum, skip);
 
         this.process = this.STATUS.Search;
         this.cursor = -1;

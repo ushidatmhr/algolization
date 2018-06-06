@@ -24,8 +24,8 @@ export default class BubleSort extends Sort {
      * 初期化
      * @param dataNum データ数
      */
-    public init(dataNum: number): void {
-        super.init(dataNum);
+    public init(dataNum: number, skip: number): void {
+        super.init(dataNum, skip);
 
         this.process = this.STATUS.Compare;
         this.cursor = -1;

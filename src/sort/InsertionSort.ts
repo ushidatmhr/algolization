@@ -24,8 +24,8 @@ export default class InsertionSort extends Sort {
      * 初期化
      * @param dataNum データ数
      */
-    public init(dataNum: number): void {
-        super.init(dataNum);
+    public init(dataNum: number, skip: number): void {
+        super.init(dataNum, skip);
 
         this.sortedIndex = -1;
         this.process = this.STATUS.Select;

@@ -22,7 +22,7 @@ export default abstract class Sort {
     }
 
     /** ソート処理のスキップ数 */
-    public autoSkip = 1;
+    public autoSkip;
 
 
     constructor(id: string) {
@@ -37,8 +37,9 @@ export default abstract class Sort {
      * 初期化処理
      * @param dataNum データ数 
      */
-    public init(dataNum: number): void {
+    public init(dataNum: number, skip: number): void {
         this.initData(dataNum);
+        this.autoSkip = skip;
     }
 
 
@@ -81,7 +82,7 @@ export default abstract class Sort {
         this.data = new DataSet();
         this.app.stage.removeChildren();
 
-        this.init(dataNum);
+        this.init(dataNum, this.autoSkip);
         this.app.render();
     }
 
