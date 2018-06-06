@@ -24,6 +24,7 @@
         <section>
             <button @click="changeSort('BubleSort')">Buble</button>
             <button @click="changeSort('InsertionSort')">Insert</button>
+            <button @click="changeSort('SelectedSort')">Select</button>
         </section>
     </div>
 </template>
@@ -33,6 +34,7 @@ import Vue from "vue";
 import Sort from "./Sort";
 import BubleSort from "./BubleSort";
 import InsertionSort from "./InsertionSort";
+import SelectedSort from "./SelectedSort";
 
 var sort: Sort;
 
@@ -74,6 +76,8 @@ export default Vue.extend({
         case "InsertionSort":
           sort = new InsertionSort("canvas");
           break;
+        case "SelectedSort":
+          sort = new SelectedSort("canvas");
       }
 
       sort.init(this.dataNum);

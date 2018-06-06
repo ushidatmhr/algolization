@@ -102,8 +102,8 @@ export default class DataSet {
      * グラフィックにカラーフィルターを適用する
      * @param index 要素の位置
      */
-    public setColorFilter(index: number): void {
-        this.data[index].graphic.filters = [ColorFilter.active];
+    public setColorFilter(index: number, filter: PIXI.filters.ColorMatrixFilter): void {
+        this.data[index].graphic.filters = [filter];
     }
 
 

@@ -1,5 +1,5 @@
 import Sort from "./Sort";
-import { Color } from "./ColorFilter";
+import { Color, ColorFilter } from "./ColorFilter";
 
 export default class InsertionSort extends Sort {
 
@@ -63,7 +63,7 @@ export default class InsertionSort extends Sort {
             return;
         }
 
-        this.data.setColorFilter(this.cursor);
+        this.data.setColorFilter(this.cursor, ColorFilter.active);
 
         this.process = this.STATUS.Insert;
     }

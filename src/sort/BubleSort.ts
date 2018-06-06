@@ -1,6 +1,6 @@
 import Sort from './Sort'
 import DataSet from './DataSet';
-import { Color } from './ColorFilter';
+import { Color, ColorFilter } from './ColorFilter';
 
 export default class BubleSort extends Sort {
 
@@ -77,8 +77,8 @@ export default class BubleSort extends Sort {
             }
         }
 
-        this.data.setColorFilter(this.cursor);
-        this.data.setColorFilter(this.cursor + 1);
+        this.data.setColorFilter(this.cursor, ColorFilter.active);
+        this.data.setColorFilter(this.cursor + 1, ColorFilter.active);
 
         // 隣同士の要素を比較する
         if (this.data.compare(this.cursor, this.cursor + 1) < 0) {
