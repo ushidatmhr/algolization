@@ -2,3 +2,4 @@ node_modules
 public
 /.firebaserc
 /firebase-debug.log
+npm-debug.log
