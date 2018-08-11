@@ -6,6 +6,12 @@ export module ColorFilter {
 
     export var point = new PIXI.filters.ColorMatrixFilter();
     point.matrix = [0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 1];
+
+    export var disable = new PIXI.filters.ColorMatrixFilter();
+    disable.matrix = [
+        0.5, 0, 0, 0, 0,
+        0, 0.5, 0, 0, 0,
+        0, 0, 0.5, 0, 0, 1];
 }
 
 export module Color {

@@ -1,5 +1,5 @@
 import Sort from "./Sort";
-import { ColorFilter } from "./ColorFilter";
+import { ColorFilter, Color } from "./ColorFilter";
 
 export default class QuickSort extends Sort {
 
@@ -108,12 +108,15 @@ export default class QuickSort extends Sort {
     }
 
 
+    /**
+     * 左検索を実施
+     */
     private nextLeftSelect(): void {
 
         if (this.leftIndex == null) {
-            this.setLeftIndex(this.start);
+            this.leftIndex = this.setNextIndex(this.start, null);
         } else {
-            this.setLeftIndex(this.leftIndex + 1);
+            this.leftIndex = this.setNextIndex(this.leftIndex + 1, this.leftIndex);
         }
 
         // ピボットと比較
@@ -125,35 +128,15 @@ export default class QuickSort extends Sort {
 
 
     /**
-     * 左検索位置を移動する
-     * @param index 移動先
-     */
-    private setLeftIndex(index: number): void {
-
-        // 前回位置がある場合は色を戻す
-        if (this.leftIndex || this.leftIndex == 0) {
-            if (this.data.get(this.leftIndex).value == this.pivot) {
-                this.data.setColorFilter(this.leftIndex, ColorFilter.point);
-            } else {
-                this.data.clearColorFilter(this.leftIndex);
-            }
-        }
-
-        this.leftIndex = index;
-        this.data.setColorFilter(index, ColorFilter.active);
-    }
-
-
-    /**
      * 右検索を実施
      */
     private nextRightSearch(): void {
 
         // 初期検索時は終了位置へ
         if (this.rightIndex == undefined || this.rightIndex == null) {
-            this.setRightIndex(this.end);
+            this.rightIndex = this.setNextIndex(this.end, null);
         } else {
-            this.setRightIndex(this.rightIndex - 1);
+            this.rightIndex = this.setNextIndex(this.rightIndex - 1, this.rightIndex);
         }
 
         // ピボットと比較
@@ -165,22 +148,25 @@ export default class QuickSort extends Sort {
 
 
     /**
-     * 右検索位置を移動する
-     * @param index 移動先
-    */
-    private setRightIndex(index: number): void {
+     * 検索位置を移動する
+     * @param nextIndex 移動先
+     * @param beforeIndex 移動前の位置
+     * @returns 移動先位置
+     */
+    private setNextIndex(nextIndex: number, beforeIndex: number): number {
 
         // 前回位置がある場合は色を戻す
-        if (this.rightIndex || this.rightIndex == 0) {
-            if (this.data.get(this.rightIndex).value == this.pivot) {
-                this.data.setColorFilter(this.rightIndex, ColorFilter.point);
+        if (!(beforeIndex == null)) {
+            if (this.data.get(beforeIndex).value == this.pivot) {
+                this.data.setColorFilter(beforeIndex, ColorFilter.point);
             } else {
-                this.data.clearColorFilter(this.rightIndex);
+                this.data.clearColorFilter(beforeIndex);
             }
         }
 
-        this.rightIndex = index;
-        this.data.setColorFilter(index, ColorFilter.active);
+        this.data.setColorFilter(nextIndex, ColorFilter.active);
+
+        return nextIndex;
     }
 
 
@@ -200,6 +186,9 @@ export default class QuickSort extends Sort {
     }
 
 
+    /**
+     * 現在のソート範囲を分割して、スタックにつめる
+     */
     private split(): void {
 
         // 色をリセット
@@ -218,6 +207,10 @@ export default class QuickSort extends Sort {
                 start: rightArea,
                 end: this.end
             });
+        } else {
+            // 分割できなければソート済みエリアにする。
+            this.data.setColor(this.start, Color.complete);
+            this.data.setColor(this.end, Color.complete);
         }
 
         let leftArea = this.leftIndex - 1;
@@ -226,6 +219,10 @@ export default class QuickSort extends Sort {
                 start: this.start,
                 end: leftArea
             });
+        } else {
+            // 分割できなければソート済みエリアにする。
+            this.data.setColor(this.start, Color.complete);
+            this.data.setColor(this.end, Color.complete);
         }
 
         this.process = this.STATUS.Recursion
@@ -233,6 +230,9 @@ export default class QuickSort extends Sort {
     }
 
 
+    /**
+     * 次のソート範囲をスタックから取得する。
+     */
     private recursion(): void {
 
         var area = this.sortAreaStack.pop();
@@ -247,6 +247,20 @@ export default class QuickSort extends Sort {
         this.leftIndex = null;
         this.rightIndex = null;
 
+        // ソート範囲外をグレーアウトする。
+        for (let i = 0; i < this.data.size(); i++) {
+
+            if (area.start <= i && i <= area.end) {
+                this.data.clearColorFilter(i);
+            } else {
+                // ソート済みならグレーアウトしない
+                if (this.data.get(i).graphic.tint != Color.complete) {
+                    this.data.setColorFilter(i, ColorFilter.disable);
+                }
+            }
+        }
+
         this.process = this.STATUS.Pivot;
     }
+
 }
