@@ -80,8 +80,10 @@ export default Vue.extend({
           break;
         case "SelectedSort":
           sort = new SelectedSort("canvas");
+          break;
         case "QuickSort":
           sort = new QuickSort("canvas");
+          break;
       }
 
       sort.init(this.dataNum, this.fast);
