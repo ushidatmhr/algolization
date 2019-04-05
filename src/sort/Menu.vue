@@ -2,10 +2,26 @@
   <div class="menu-container">
     <nav class="side-menu">
       <div class="head">SORT</div>
-      <div class="menu-item">Bubble Sort</div>
-      <div class="menu-item">Insert Sort</div>
-      <div class="menu-item">Select Sort</div>
-      <div class="menu-item">Quick Sort</div>
+      <div
+        class="menu-item"
+        :class="[$route.path == '/BubbleSort' || $route.path == '/' ? 'active' : '']"
+        @click="pushRoute('BubbleSort')"
+      >Bubble Sort</div>
+      <div
+        class="menu-item"
+        :class="[$route.path == '/InsertionSort' ? 'active' : '']"
+        @click="pushRoute('InsertionSort')"
+      >Insert Sort</div>
+      <div
+        class="menu-item"
+        :class="[$route.path == '/SelectedSort' ? 'active' : '']"
+        @click="pushRoute('SelectedSort')"
+      >Selected Sort</div>
+      <div
+        class="menu-item"
+        :class="[$route.path == '/QuickSort' ? 'active' : '']"
+        @click="pushRoute('QuickSort')"
+      >Quick Sort</div>
     </nav>
   </div>
 </template>
@@ -16,6 +32,11 @@ import Vue from "vue";
 export default Vue.extend({
   data() {
     return {};
+  },
+  methods: {
+    pushRoute(route: string) {
+      this.$router.push(route);
+    }
   }
 });
 </script>
@@ -55,6 +76,10 @@ export default Vue.extend({
 
       &:hover {
         background-color: #90a4ae;
+      }
+
+      &.active {
+        background-color: #546e7a;
       }
     }
   }

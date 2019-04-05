@@ -18,17 +18,12 @@
       <button class="control label" :class="fast == 10 ? 'active' : ''" @click="setFast(10)">×10</button>
       <button class="control label" :class="fast == 100 ? 'active' : ''" @click="setFast(100)">×100</button>
     </section>
-    <section>
-      <button @click="changeSort('BubleSort')">Buble</button>
-      <button @click="changeSort('InsertionSort')">Insert</button>
-      <button @click="changeSort('SelectedSort')">Select</button>
-      <button @click="changeSort('QuickSort')">Quick</button>
-    </section>
   </div>
 </template>
 
 <script lang="ts">
 import Vue from "vue";
+import VueRouter from "vue-router";
 import Sort from "./Sort";
 import BubleSort from "./BubleSort";
 import InsertionSort from "./InsertionSort";
@@ -46,10 +41,17 @@ export default Vue.extend({
     };
   },
   mounted() {
-    sort = new BubleSort("canvas", this.sortCompleted);
-    sort.init(this.dataNum, this.fast);
+    this.setSortComponent(this.$route.path);
+  },
+  watch: {
+    $route(to, from) {
+      this.setSortComponent(this.$route.path);
+    }
   },
   methods: {
+    chengeQuery() {
+      this.$router.push("/q");
+    },
     next() {
       sort.update();
     },
@@ -69,20 +71,26 @@ export default Vue.extend({
       this.fast = fast;
       sort.autoSkip = this.fast;
     },
-    changeSort(mode: string) {
-      sort.destory();
+    setSortComponent(mode: string) {
+      if (sort != null) {
+        sort.destory();
+      }
+
       switch (mode) {
-        case "BubleSort":
+        case "/BubleSort":
           sort = new BubleSort("canvas", this.sortCompleted);
           break;
-        case "InsertionSort":
+        case "/InsertionSort":
           sort = new InsertionSort("canvas", this.sortCompleted);
           break;
-        case "SelectedSort":
+        case "/SelectedSort":
           sort = new SelectedSort("canvas", this.sortCompleted);
           break;
-        case "QuickSort":
+        case "/QuickSort":
           sort = new QuickSort("canvas", this.sortCompleted);
+          break;
+        default:
+          sort = new BubleSort("canvas", this.sortCompleted);
           break;
       }
 
