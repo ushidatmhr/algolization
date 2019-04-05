@@ -31,6 +31,7 @@ export default Vue.extend({
     height: 100vh;
     display: flex;
     flex-direction: column;
+    border-right: 1px solid #cfd8dc;
 
     .head,
     .menu-item {

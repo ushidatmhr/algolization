@@ -101,6 +101,7 @@ export default Vue.extend({
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  background-color: #263238;
 }
 
 .control {
