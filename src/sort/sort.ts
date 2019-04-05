@@ -24,12 +24,16 @@ export default abstract class Sort {
     /** ソート処理のスキップ数 */
     public autoSkip;
 
+    private completedCallback: () => void;
 
-    constructor(id: string) {
+
+    constructor(id: string, completedCallback: () => void) {
         this.app = new PIXI.Application(854, 480, { backgroundColor: 0x424242 });
         document.getElementById(id).appendChild(this.app.view);
 
         this.initAuto();
+
+        this.completedCallback = completedCallback;
     }
 
 
@@ -55,6 +59,7 @@ export default abstract class Sort {
             for (var i = 0; i < this.autoSkip; i++) {
                 if (!this.next()) {
                     this.app.ticker.stop();
+                    this.completedCallback();
                 }
             }
         });
