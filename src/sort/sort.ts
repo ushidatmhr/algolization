@@ -1,5 +1,6 @@
 import * as PIXI from 'pixi.js'
 import DataSet from './DataSet';
+import { Color } from './ColorFilter';
 
 export default abstract class Sort {
 
@@ -155,7 +156,7 @@ export default abstract class Sort {
         if (srcData.length < 271) {
             borderColor = 0x000000;
         } else {
-            borderColor = 0xffffff;
+            borderColor = Color.normal;
         }
 
         for (var i = 0; i < dataNum; i++) {
@@ -163,7 +164,7 @@ export default abstract class Sort {
             // Graphicsを生成
             var barGraph = new PIXI.Graphics();
             barGraph.lineStyle(1, borderColor);
-            barGraph.beginFill(0xffffff, 1);
+            barGraph.beginFill(Color.normal, 1);
             barGraph.drawRect(0, 0, barSize.width, srcData[i] * barSize.height);
             barGraph.endFill();
 

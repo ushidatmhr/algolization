@@ -15,5 +15,6 @@ export module ColorFilter {
 }
 
 export module Color {
-    export var complete = 0xF50057;
+    export var normal = 0xECEFF1;
+    export var complete = 0x00838F;
 }
