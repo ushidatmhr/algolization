@@ -16,5 +16,8 @@ export module ColorFilter {
 
 export module Color {
     export var normal = 0xECEFF1;
+    export var active = 0xFFEB3B;
+    export var point = 0x76FF03;
+    export var disable = 0x9E9E9E;
     export var complete = 0x00838F;
 }

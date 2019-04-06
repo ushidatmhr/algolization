@@ -59,8 +59,8 @@ export default class BubleSort extends Sort {
     private nextCompare(): void {
 
         if (-1 < this.cursor) {
-            this.data.clearColorFilter(this.cursor);
-            this.data.clearColorFilter(this.cursor + 1);
+            this.data.clearColor(this.cursor);
+            this.data.clearColor(this.cursor + 1);
         }
 
         this.cursor++;
@@ -77,8 +77,8 @@ export default class BubleSort extends Sort {
             }
         }
 
-        this.data.setColorFilter(this.cursor, ColorFilter.active);
-        this.data.setColorFilter(this.cursor + 1, ColorFilter.active);
+        this.data.pushColor(this.cursor, Color.active);
+        this.data.pushColor(this.cursor + 1, Color.active);
 
         // 隣同士の要素を比較する
         if (this.data.compare(this.cursor, this.cursor + 1) < 0) {

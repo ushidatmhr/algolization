@@ -4,7 +4,9 @@ type Data = {
     /** データ */
     value: number,
     /** グラフィック */
-    graphic: PIXI.Graphics
+    graphic: PIXI.Graphics,
+    /** カラー */
+    colors: number[]
 }
 
 export default class DataSet {
@@ -94,24 +96,50 @@ export default class DataSet {
      * @param color 変更する色
      */
     public setColor(index: number, color: number): void {
-        this.data[index].graphic.tint = color;
+        this.data[index].colors = [color];
+        this.applyColor(index);
+    }
+
+
+    private applyColor(index: number) {
+        var data = this.data[index];
+        data.graphic.tint = data.colors[data.colors.length - 1];
     }
 
 
     /**
-     * グラフィックにカラーフィルターを適用する
+     * グラフィックにカラーを追加する。
+     * 最後に追加したカラーが適用される。
+     * @param index 要素の位置
+     * @param color 追加する色
+     */
+    public pushColor(index: number, color: number) {
+        this.data[index].colors.push(color);
+        this.applyColor(index);
+    }
+
+
+    /**
+     * 最後に適用したカラーを削除する。
      * @param index 要素の位置
      */
-    public setColorFilter(index: number, filter: PIXI.filters.ColorMatrixFilter): void {
-        this.data[index].graphic.filters = [filter];
+    public popColor(index: number) {
+        // カラーが1つの場合は何もしない
+        if (this.data[index].colors.length == 1) {
+            return;
+        }
+
+        this.data[index].colors.pop();
+        this.applyColor(index);
     }
 
 
     /**
-     * カラーフィルターをクリアする。
-     * @param index 対象の要素の位置
+     * カラーのスタックを先頭要素以外を削除する。
+     * @param index 要素の位置
      */
-    public clearColorFilter(index: number): void {
-        this.data[index].graphic.filters = [];
+    public clearColor(index: number) {
+        this.data[index].colors.splice(1);
+        this.applyColor(index);
     }
 }

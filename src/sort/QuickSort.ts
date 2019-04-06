@@ -102,7 +102,7 @@ export default class QuickSort extends Sort {
 
         // 先頭のデータをピボットに設定
         this.pivot = this.data.get(this.start).value;
-        this.data.setColorFilter(this.start, ColorFilter.point);
+        this.data.pushColor(this.start, Color.point);
 
         this.process = this.STATUS.SearchLeft;
     }
@@ -158,13 +158,13 @@ export default class QuickSort extends Sort {
         // 前回位置がある場合は色を戻す
         if (!(beforeIndex == null)) {
             if (this.data.get(beforeIndex).value == this.pivot) {
-                this.data.setColorFilter(beforeIndex, ColorFilter.point);
+                this.data.pushColor(beforeIndex, Color.point);
             } else {
-                this.data.clearColorFilter(beforeIndex);
+                this.data.clearColor(beforeIndex)
             }
         }
 
-        this.data.setColorFilter(nextIndex, ColorFilter.active);
+        this.data.pushColor(nextIndex, Color.active);
 
         return nextIndex;
     }
@@ -192,11 +192,12 @@ export default class QuickSort extends Sort {
     private split(): void {
 
         // 色をリセット
-        this.data.clearColorFilter(this.leftIndex);
-        this.data.clearColorFilter(this.rightIndex);
+        this.data.clearColor(this.leftIndex);
+        this.data.clearColor(this.rightIndex);
+
         for (let i = 0; i < this.data.size(); i++) {
             if (this.data.get(i).value == this.pivot) {
-                this.data.clearColorFilter(i);
+                this.data.clearColor(i);
             }
         }
 
@@ -251,11 +252,11 @@ export default class QuickSort extends Sort {
         for (let i = 0; i < this.data.size(); i++) {
 
             if (area.start <= i && i <= area.end) {
-                this.data.clearColorFilter(i);
+                this.data.clearColor(i);
             } else {
                 // ソート済みならグレーアウトしない
                 if (this.data.get(i).graphic.tint != Color.complete) {
-                    this.data.setColorFilter(i, ColorFilter.disable);
+                    this.data.pushColor(i, Color.disable);
                 }
             }
         }

@@ -175,7 +175,8 @@ export default abstract class Sort {
             // データを追加
             this.data.add({
                 value: srcData[i],
-                graphic: barGraph
+                graphic: barGraph,
+                colors: [Color.normal]
             })
 
             // 画面へ追加

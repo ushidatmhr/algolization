@@ -65,10 +65,10 @@ export default class SelectedSort extends Sort {
         if (this.cursor != this.sortedIndex) {
             if (this.cursor == this.minDataIndex) {
                 // 色を変更
-                this.data.setColorFilter(this.cursor, ColorFilter.point);
+                this.data.pushColor(this.cursor, Color.point);
 
             } else {
-                this.data.clearColorFilter(this.cursor);
+                this.data.clearColor(this.cursor);
             }
         }
 
@@ -80,7 +80,7 @@ export default class SelectedSort extends Sort {
             return;
         }
 
-        this.data.setColorFilter(this.cursor, ColorFilter.active);
+        this.data.pushColor(this.cursor, Color.active);
 
         // 現在の最小値と比較
         if (this.minDataIndex < 0
@@ -88,7 +88,7 @@ export default class SelectedSort extends Sort {
 
             // 色を戻す
             if (0 <= this.minDataIndex) {
-                this.data.clearColorFilter(this.minDataIndex);
+                this.data.clearColor(this.minDataIndex);
             }
 
             this.minDataIndex = this.cursor;
@@ -110,7 +110,7 @@ export default class SelectedSort extends Sort {
         }
 
         // 色を変更
-        this.data.clearColorFilter(this.sortedIndex);
+        this.data.clearColor(this.sortedIndex);
         this.data.setColor(this.sortedIndex, Color.complete);
 
 

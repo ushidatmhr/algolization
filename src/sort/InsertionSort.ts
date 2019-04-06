@@ -62,8 +62,7 @@ export default class InsertionSort extends Sort {
             this.process = this.STATUS.Complete;
             return;
         }
-
-        this.data.setColorFilter(this.cursor, ColorFilter.active);
+        this.data.pushColor(this.cursor, Color.active);
 
         this.process = this.STATUS.Insert;
     }
@@ -79,7 +78,7 @@ export default class InsertionSort extends Sort {
 
             this.sortedIndex++;
 
-            this.data.clearColorFilter(this.cursor);
+            this.data.clearColor(this.cursor);
             this.data.setColor(this.cursor, Color.complete);
 
             this.process = this.STATUS.Select;
