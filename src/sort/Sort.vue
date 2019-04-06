@@ -116,14 +116,18 @@ export default Vue.extend({
   background: none;
   height: 36px;
   border: none;
-  color: #3f51b5;
+  color: white;
   outline: none;
-  font-weight: bold;
+  // font-weight: bold;
 
   &.label {
     border-radius: 2px;
     padding: 0 16px;
     font-size: 14px;
+
+    &:active {
+      color: #e91e63;
+    }
   }
 
   &.circle {
