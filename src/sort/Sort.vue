@@ -49,6 +49,9 @@ export default Vue.extend({
     }
   },
   methods: {
+    init() {
+      this.isAuto = false;
+    },
     chengeQuery() {
       this.$router.push("/q");
     },
@@ -57,6 +60,7 @@ export default Vue.extend({
     },
     reset() {
       sort.reset(this.dataNum);
+      this.init();
     },
     toggleAuto() {
       sort.toggleAuto();
@@ -71,6 +75,7 @@ export default Vue.extend({
       }
 
       sort.reset(this.dataNum);
+      this.init();
     },
     setFast(fast: number) {
       this.fast = fast;
@@ -100,6 +105,7 @@ export default Vue.extend({
       }
 
       sort.init(this.dataNum, this.fast);
+      this.init();
     },
     sortCompleted() {
       this.isAuto = false;
