@@ -65,6 +65,11 @@ export default Vue.extend({
     },
     count(count: number) {
       this.dataNum += count;
+
+      if (this.dataNum < 2) {
+        this.dataNum = 2;
+      }
+
       sort.reset(this.dataNum);
     },
     setFast(fast: number) {
