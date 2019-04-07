@@ -31,6 +31,12 @@ export default Vue.extend({
     min-width: 200px;
   }
 
+  @media screen and (max-width: 480px) {
+    .menu {
+      display: none;
+    }
+  }
+
   .main {
     flex-grow: 1;
   }

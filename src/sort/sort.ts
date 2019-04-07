@@ -29,7 +29,10 @@ export default abstract class Sort {
 
 
     constructor(id: string, completedCallback: () => void) {
-        this.app = new PIXI.Application(854, 480, { backgroundColor: 0x424242 });
+        var canvasWidth = window.innerWidth;
+        canvasWidth = (840 < canvasWidth) ? 840 : canvasWidth; 
+        
+        this.app = new PIXI.Application(canvasWidth, 480, { backgroundColor: 0x424242 });
         document.getElementById(id).appendChild(this.app.view);
 
         this.initAuto();
