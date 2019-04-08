@@ -3,3 +3,4 @@ public
 /.firebaserc
 /firebase-debug.log
 npm-debug.log
+.firebase
