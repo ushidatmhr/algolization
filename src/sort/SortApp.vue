@@ -1,11 +1,21 @@
 <template>
-  <div class="container">
-    <nav class="menu">
-      <Menu/>
-    </nav>
-    <section class="main">
-      <Sort/>
-    </section>
+  <div>
+    <header class="header">
+      <div class="sub-area">
+        <img src="/bars-solid.svg" @click="openMenu">
+      </div>
+      <div class="main-area">{{title}}</div>
+      <div class="sub-area"></div>
+    </header>
+
+    <div class="container">
+      <nav class="menu">
+        <Menu v-bind:isOpen="menuOpen" v-on:applyTitle="title = $event"/>
+      </nav>
+      <section class="main">
+        <Sort/>
+      </section>
+    </div>
   </div>
 </template>
 
@@ -14,12 +24,59 @@ import Vue from "vue";
 
 export default Vue.extend({
   data() {
-    return {};
+    return {
+      menuOpen: false,
+      title: String
+    };
+  },
+  mounted() {
+    this.title = this.$route.path.replace("/", "");
+  },
+  methods: {
+    openMenu() {
+      this.menuOpen = !this.menuOpen;
+    }
   }
 });
 </script>
 
 <style lang="scss" scoped>
+.header {
+  position: fixed;
+  height: 57px;
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: center;
+  background-color: #607d8b;
+  border-bottom: 3px solid #cfd8dc;
+  color: white;
+  z-index: 9;
+
+  @media screen and (min-width: 481px) {
+    & {
+      display: none;
+    }
+  }
+
+  .sub-area {
+    width: 50px;
+
+    img {
+      width: 25px;
+      padding: 10px;
+    }
+  }
+
+  .main-area {
+    font-size: 150%;
+    line-height: 57px;
+    text-align: center;
+    flex-grow: 1;
+  }
+}
+
 .container {
   display: flex;
   flex-direction: row;

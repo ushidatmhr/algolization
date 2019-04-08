@@ -1,5 +1,5 @@
 <template>
-  <div class="menu-container">
+  <div class="menu-container" :class="isOpen ? 'opem' : 'close'">
     <nav class="side-menu">
       <div class="head">SORT</div>
       <div
@@ -30,12 +30,16 @@
 import Vue from "vue";
 
 export default Vue.extend({
+  props: {
+    isOpen: Boolean
+  },
   data() {
     return {};
   },
   methods: {
     pushRoute(route: string) {
       this.$router.push(route);
+      this.$emit("applyTitle", route);
     }
   }
 });
@@ -48,16 +52,23 @@ export default Vue.extend({
 
   @media screen and (max-width: 480px) {
     & {
+      height: 105vh;
       position: fixed;
+      top: -13px;
+    }
+
+    &.close {
       left: -200px;
-      top: 0;
+    }
+
+    &.open {
     }
   }
 
   .side-menu {
     background-color: #263238;
     color: white;
-    height: 100vh;
+    height: 100%;
     display: flex;
     flex-direction: column;
     border-right: 1px solid #cfd8dc;
