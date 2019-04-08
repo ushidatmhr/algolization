@@ -4,7 +4,8 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "build": "webpack --config build/webpack.config.js --watch"
+    "build": "webpack --config build/webpack.config.js --watch",
+    "build:prod": "webpack --config build/webpack.config.js --mode production"
   },
   "repository": {
     "type": "git",
@@ -31,6 +32,7 @@
     "sass-loader": "^7.0.1",
     "ts-loader": "^4.3.0",
     "typescript": "^2.8.3",
+    "url-loader": "^1.1.2",
     "vue": "^2.5.16",
     "vue-loader": "^15.2.1",
     "vue-template-compiler": "^2.5.16",

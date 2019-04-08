@@ -13,7 +13,7 @@ module.exports = {
         filename: '[name].js'
     },
     resolve: {
-        extensions: ['.webpack.js', '.web.js', '.ts', '.tsx', '.js', '.vue', '.ejs'],
+        extensions: ['.webpack.js', '.web.js', '.ts', '.tsx', '.js', '.vue', '.ejs', 'svg'],
         modules: ["node_modules"]
     },
     module: {
@@ -46,6 +46,10 @@ module.exports = {
                     'ejs-html-loader'
                 ]
             },
+            {
+                test: /\.(png|jpg|gif|svg)$/i,
+                loader: 'url-loader'
+            }
         ]
     },
     plugins: [
