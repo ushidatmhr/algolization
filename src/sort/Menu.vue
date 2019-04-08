@@ -1,5 +1,5 @@
 <template>
-  <div class="menu-container" :class="isOpen ? 'opem' : 'close'">
+  <div class="menu-container" :class="isOpen ? 'open' : 'close'">
     <nav class="side-menu">
       <div class="head">SORT</div>
       <div
@@ -49,19 +49,21 @@ export default Vue.extend({
 .menu-container {
   min-width: 200px;
   height: 100vh;
+  transition: all 300ms 0s ease;
 
   @media screen and (max-width: 480px) {
     & {
       height: 105vh;
       position: fixed;
       top: -13px;
-    }
-
-    &.close {
       left: -200px;
     }
 
+    &.close {
+    }
+
     &.open {
+      transform: translateX(200px);
     }
   }
 
