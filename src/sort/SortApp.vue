@@ -27,16 +27,6 @@ export default Vue.extend({
   align-items: center;
   height: 100vh;
 
-  .menu {
-    min-width: 200px;
-  }
-
-  @media screen and (max-width: 480px) {
-    .menu {
-      display: none;
-    }
-  }
-
   .main {
     flex-grow: 1;
   }

@@ -43,8 +43,16 @@ export default Vue.extend({
 
 <style lang="scss" scoped>
 .menu-container {
-  width: 100%;
+  min-width: 200px;
   height: 100vh;
+
+  @media screen and (max-width: 480px) {
+    & {
+      position: fixed;
+      left: -200px;
+      top: 0;
+    }
+  }
 
   .side-menu {
     background-color: #263238;
