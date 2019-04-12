@@ -121,6 +121,7 @@ export default Vue.extend({
   justify-content: center;
   align-items: center;
   background-color: #263238;
+  height: 100%;
 }
 
 .control {
@@ -129,7 +130,6 @@ export default Vue.extend({
   border: none;
   color: white;
   outline: none;
-  // font-weight: bold;
 
   &.label {
     border-radius: 2px;

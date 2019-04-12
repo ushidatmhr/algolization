@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="container">
     <header class="header">
       <div class="sub-area">
         <img src="../../images/bars-solid.svg" @click="openMenu">
@@ -8,7 +8,7 @@
       <div class="sub-area"></div>
     </header>
 
-    <div class="container">
+    <div class="main-container">
       <nav class="menu">
         <Menu v-bind:isOpen="menuOpen" v-on:applyTitle="title = $event"/>
       </nav>
@@ -41,51 +41,58 @@ export default Vue.extend({
 </script>
 
 <style lang="scss" scoped>
-.header {
-  position: fixed;
-  height: 57px;
-  width: 100%;
-  display: flex;
-  flex-direction: row;
-  justify-content: flex-start;
-  align-items: center;
-  background-color: #607d8b;
-  border-bottom: 3px solid #cfd8dc;
-  color: white;
-  z-index: 9;
-
-  @media screen and (min-width: 481px) {
-    & {
-      display: none;
-    }
-  }
-
-  .sub-area {
-    width: 50px;
-
-    img {
-      width: 25px;
-      padding: 10px;
-    }
-  }
-
-  .main-area {
-    font-size: 150%;
-    line-height: 57px;
-    text-align: center;
-    flex-grow: 1;
-  }
-}
-
 .container {
   display: flex;
-  flex-direction: row;
-  justify-content: flex-start;
-  align-items: center;
+  flex-direction: column;
   height: 100vh;
 
-  .main {
+  .header {
+    // position: fixed;
+    height: 57px;
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    align-items: center;
+    background-color: #607d8b;
+    border-bottom: 3px solid #cfd8dc;
+    color: white;
+    z-index: 9;
+
+    @media screen and (min-width: 481px) {
+      & {
+        display: none;
+      }
+    }
+
+    .sub-area {
+      width: 50px;
+
+      img {
+        width: 25px;
+        padding: 10px;
+      }
+    }
+
+    .main-area {
+      font-size: 150%;
+      line-height: 57px;
+      text-align: center;
+      flex-grow: 1;
+    }
+  }
+
+  .main-container {
     flex-grow: 1;
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    align-items: center;
+
+    .main {
+      flex-grow: 1;
+      height: 100%;
+    }
   }
 }
 </style>
