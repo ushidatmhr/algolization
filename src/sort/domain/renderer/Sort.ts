@@ -1,6 +1,6 @@
 import * as PIXI from 'pixi.js'
-import DataSet from './DataSet';
-import { Color } from './ColorFilter';
+import DataSet from '../structure/DataSet';
+import { Color } from '../structure/ColorFilter';
 
 export default abstract class Sort {
 

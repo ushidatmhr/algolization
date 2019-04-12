@@ -24,11 +24,11 @@
 <script lang="ts">
 import Vue from "vue";
 import VueRouter from "vue-router";
-import Sort from "./Sort";
-import BubleSort from "./BubleSort";
-import InsertionSort from "./InsertionSort";
-import SelectedSort from "./SelectedSort";
-import QuickSort from "./QuickSort";
+import Sort from "../domain/renderer/Sort";
+import BubleSort from "../domain/renderer/BubleSort";
+import InsertionSort from "../domain/renderer/InsertionSort";
+import SelectedSort from "../domain/renderer/SelectedSort";
+import QuickSort from "../domain/renderer/QuickSort";
 
 var sort: Sort;
 

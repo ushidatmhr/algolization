@@ -2,7 +2,7 @@
   <div class="container">
     <header class="header">
       <div class="sub-area">
-        <img src="../../images/bars-solid.svg" @click="openMenu">
+        <img src="../../../images/bars-solid.svg" @click="openMenu">
       </div>
       <div class="main-area">{{title}}</div>
       <div class="sub-area"></div>

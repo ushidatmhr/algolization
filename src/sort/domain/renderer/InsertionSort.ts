@@ -1,5 +1,5 @@
 import Sort from "./Sort";
-import { Color, ColorFilter } from "./ColorFilter";
+import { Color } from "../structure/ColorFilter";
 
 export default class InsertionSort extends Sort {
 

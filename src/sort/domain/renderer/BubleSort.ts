@@ -1,6 +1,5 @@
 import Sort from './Sort'
-import DataSet from './DataSet';
-import { Color, ColorFilter } from './ColorFilter';
+import { Color } from '../structure/ColorFilter';
 
 export default class BubleSort extends Sort {
 

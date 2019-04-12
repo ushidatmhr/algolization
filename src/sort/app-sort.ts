@@ -1,8 +1,8 @@
 import Vue from 'vue'
 import VueRouter from "vue-router";
-import SortApp from './SortApp.vue'
-import Sort from './Sort.vue'
-import Menu from './Menu.vue'
+import SortApp from './components/SortApp.vue'
+import Sort from './components/Sort.vue'
+import Menu from './components/Menu.vue'
 
 Vue.use(VueRouter);
 
