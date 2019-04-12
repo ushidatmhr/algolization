@@ -8,7 +8,7 @@
     <section>
       <button class="control circle" @click="count(-10)">-</button>
       <button class="control circle" @click="count(-1)">-</button>
-      {{dataNum}}
+      <span class="control">{{dataNum}}</span>
       <button class="control circle" @click="count(1)">+</button>
       <button class="control circle" @click="count(10)">+</button>
     </section>
@@ -134,7 +134,7 @@ export default Vue.extend({
   &.label {
     border-radius: 2px;
     padding: 0 16px;
-    font-size: 14px;
+    font-size: 20px;
 
     &:active {
       color: #e91e63;
