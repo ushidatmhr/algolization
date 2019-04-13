@@ -6,7 +6,8 @@ module.exports = {
     mode: 'development',
     entry: {
         app: './src/app.ts',
-        sort: './src/sort/app-sort.ts'
+        sort: './src/sort/app-sort.ts',
+        maze: './src/maze/app-maze.ts'
     },
     output: {
         path: path.resolve(__dirname, '../public'),
@@ -62,6 +63,11 @@ module.exports = {
         new HtmlWebpackPlugin({
             filename: 'sort.html',
             template: './src/sort/sort.ejs',
+            inject: false
+        }),
+        new HtmlWebpackPlugin({
+            filename: 'maze.html',
+            template: './src/maze/maze.ejs',
             inject: false
         })
     ]
