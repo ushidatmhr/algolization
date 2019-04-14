@@ -1,10 +1,13 @@
 import * as PIXI from 'pixi.js'
-
+import DataSet from '../structure/DataSet';
+import { TileType } from '../structure/DataSet';
+import { Color } from '../structure/ColorFilter'
 export default abstract class Maze {
 
     /** PIXI本体 */
     protected app: PIXI.Application;
 
+    protected mazeData: DataSet
 
     /** ディスプレイオプション */
     protected displayOptions = {
@@ -15,7 +18,7 @@ export default abstract class Maze {
     public autoSkip: number;
 
     constructor(id: string, completedCallback: () => void) {
-        this.app = new PIXI.Application(500, 500, { backgroundColor: 0xECEFF1 });
+        this.app = new PIXI.Application(500, 500, { backgroundColor: Color.borderOff });
         document.getElementById(id).appendChild(this.app.view);
     }
 
@@ -24,6 +27,7 @@ export default abstract class Maze {
      * @param dataNum データ数 
      */
     public init(dataNum: number, skip: number): void {
+        this.mazeData = new DataSet(dataNum);
         this.initData(dataNum);
         this.autoSkip = skip;
     }
@@ -57,7 +61,7 @@ export default abstract class Maze {
         for (var row = 0; row < massNum; row++) {
             for (var col = 0; col < massNum; col++) {
                 var massGraph = new PIXI.Graphics();
-                massGraph.beginFill(0x00838F, 1);
+                massGraph.beginFill(Color.tile, 1);
                 massGraph.drawRect(0, 0, massSize.width, massSize.height);
                 massGraph.endFill();
 
@@ -85,29 +89,40 @@ export default abstract class Maze {
         for (var row = 0; row < massNum + 1; row++) {
             for (var col = 0; col < massNum + 1; col++) {
 
-                var borderGraph = new PIXI.Graphics();
-                borderGraph.beginFill(0xECEFF1, 1);
-                borderGraph.drawRect(0, 0, massSize.width, this.displayOptions.borderSize);
-                borderGraph.endFill();
+                // 横向きの壁
+                if (col < massNum) {
 
-                borderGraph.x = (massSize.width * row) + (this.displayOptions.borderSize * (row + 1));
-                borderGraph.y = (massSize.height * col) + this.displayOptions.borderSize * (col);
+                    var borderGraph = new PIXI.Graphics();
+                    borderGraph.beginFill(0xECEFF1, 1);
+                    borderGraph.drawRect(0, 0, massSize.width, this.displayOptions.borderSize);
+                    borderGraph.endFill();
 
+                    borderGraph.x = (massSize.width * col) + (this.displayOptions.borderSize * (col + 1));
+                    borderGraph.y = (massSize.height * row) + (this.displayOptions.borderSize * row);
 
-                this.app.stage.addChild(borderGraph);
+                    this.mazeData.set(row * 2, (col * 2) + 1, borderGraph, true, TileType.Wall);
 
+                    this.app.stage.addChild(borderGraph);
+                }
 
-                var borderGraph = new PIXI.Graphics();
-                borderGraph.beginFill(0xECEFF1, 1);
-                borderGraph.drawRect(0, 0, this.displayOptions.borderSize, massSize.height);
-                borderGraph.endFill();
+                // 縦向きの壁
+                if (row < massNum) {
 
-                borderGraph.x = (massSize.width * row) + this.displayOptions.borderSize * (row);
-                borderGraph.y = (massSize.height * col) + this.displayOptions.borderSize * (col + 1);
+                    var borderGraph = new PIXI.Graphics();
+                    borderGraph.beginFill(0xECEFF1, 1);
+                    borderGraph.drawRect(0, 0, this.displayOptions.borderSize, massSize.height);
+                    borderGraph.endFill();
 
+                    borderGraph.x = (massSize.width * col) + this.displayOptions.borderSize * (col);
+                    borderGraph.y = (massSize.height * row) + this.displayOptions.borderSize * (row + 1);
 
-                this.app.stage.addChild(borderGraph);
+                    this.mazeData.set((row * 2) + 1, col * 2, borderGraph, true, TileType.Wall);
+
+                    this.app.stage.addChild(borderGraph);
+                }
             }
         }
+
+        console.log(this.mazeData)
     }
 }

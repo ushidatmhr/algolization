@@ -31,7 +31,7 @@ var maze: Maze;
 export default Vue.extend({
   data() {
     return {
-      dataNum: 15,
+      dataNum: 5,
       fast: 1,
       isAuto: false
     };
