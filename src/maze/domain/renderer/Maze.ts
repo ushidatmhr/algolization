@@ -1,6 +1,6 @@
 import * as PIXI from 'pixi.js'
 import DataSet from '../structure/DataSet';
-import { TileType } from '../structure/DataSet';
+import MazeDataSet, { TileType } from '../structure/DataSet';
 import { Color } from '../structure/ColorFilter'
 export default abstract class Maze {
 
@@ -81,11 +81,6 @@ export default abstract class Maze {
      */
     private initBorderData(massNum: number, massSize: { width: number, height: number }) {
 
-        var massSize = {
-            width: (this.app.view.width - ((massNum + 1) * this.displayOptions.borderSize)) / massNum,
-            height: (this.app.view.height - ((massNum + 1) * this.displayOptions.borderSize)) / massNum
-        }
-
         for (var row = 0; row < massNum + 1; row++) {
             for (var column = 0; column < massNum + 1; column++) {
 
@@ -129,6 +124,20 @@ export default abstract class Maze {
             }
         }
 
-        console.log(this.mazeData)
+    }
+
+
+    /**
+     * リセット処理
+     * @param dataNum データ数 
+     */
+    public reset(dataNum: number): void {
+
+        this.app.ticker.stop();
+
+        this.mazeData = new MazeDataSet(dataNum);
+        this.app.stage.removeChildren();
+
+        this.init(dataNum, this.autoSkip);
     }
 }

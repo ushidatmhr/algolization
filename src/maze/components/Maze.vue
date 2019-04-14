@@ -52,7 +52,7 @@ export default Vue.extend({
       //   maze.update();
     },
     reset() {
-      //   maze.reset(this.dataNum);
+      maze.reset(this.dataNum);
       this.init();
     },
     toggleAuto() {
@@ -67,7 +67,7 @@ export default Vue.extend({
         this.dataNum = 2;
       }
 
-      //   maze.reset(this.dataNum);
+      maze.reset(this.dataNum);
       this.init();
     },
     setFast(fast: number) {

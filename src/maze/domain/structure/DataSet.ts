@@ -18,6 +18,10 @@ export default class MazeDataSet {
 
     private mazeData: Data[][];
 
+    /**
+     * 初期化
+     * @param dataNum データ数
+     */
     constructor(dataNum: number) {
         this.mazeData = [];
 
@@ -44,6 +48,12 @@ export default class MazeDataSet {
     }
 
 
+    /**
+     * 壁の有無を設定する
+     * @param row 行
+     * @param column 列
+     * @param flag true：壁あり、false：壁なし
+     */
     public setObstacle(row: number, column: number, flag: boolean) {
         this.mazeData[row][column].obstacle = flag;
 
