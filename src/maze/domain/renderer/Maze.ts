@@ -18,7 +18,7 @@ export default abstract class Maze {
     public autoSkip: number;
 
     constructor(id: string, completedCallback: () => void) {
-        this.app = new PIXI.Application(500, 500, { backgroundColor: Color.borderOff });
+        this.app = new PIXI.Application(500, 500, { backgroundColor: Color.borderOn });
         document.getElementById(id).appendChild(this.app.view);
     }
 
@@ -87,20 +87,23 @@ export default abstract class Maze {
         }
 
         for (var row = 0; row < massNum + 1; row++) {
-            for (var col = 0; col < massNum + 1; col++) {
+            for (var column = 0; column < massNum + 1; column++) {
 
                 // 横向きの壁
-                if (col < massNum) {
+                if (column < massNum) {
 
                     var borderGraph = new PIXI.Graphics();
                     borderGraph.beginFill(0xECEFF1, 1);
                     borderGraph.drawRect(0, 0, massSize.width, this.displayOptions.borderSize);
                     borderGraph.endFill();
 
-                    borderGraph.x = (massSize.width * col) + (this.displayOptions.borderSize * (col + 1));
+                    borderGraph.x = (massSize.width * column) + (this.displayOptions.borderSize * (column + 1));
                     borderGraph.y = (massSize.height * row) + (this.displayOptions.borderSize * row);
 
-                    this.mazeData.set(row * 2, (col * 2) + 1, borderGraph, true, TileType.Wall);
+                    // 外壁判定
+                    var outer = (row == 0) || (row == massNum);
+
+                    this.mazeData.set(row * 2, (column * 2) + 1, borderGraph, outer, TileType.Wall);
 
                     this.app.stage.addChild(borderGraph);
                 }
@@ -113,10 +116,13 @@ export default abstract class Maze {
                     borderGraph.drawRect(0, 0, this.displayOptions.borderSize, massSize.height);
                     borderGraph.endFill();
 
-                    borderGraph.x = (massSize.width * col) + this.displayOptions.borderSize * (col);
+                    borderGraph.x = (massSize.width * column) + this.displayOptions.borderSize * (column);
                     borderGraph.y = (massSize.height * row) + this.displayOptions.borderSize * (row + 1);
 
-                    this.mazeData.set((row * 2) + 1, col * 2, borderGraph, true, TileType.Wall);
+                    // 外壁判定
+                    var outer = (column == 0) || (column == massNum);
+
+                    this.mazeData.set((row * 2) + 1, column * 2, borderGraph, outer, TileType.Wall);
 
                     this.app.stage.addChild(borderGraph);
                 }
