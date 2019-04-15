@@ -57,7 +57,7 @@ export default Vue.extend({
       this.init();
     },
     toggleAuto() {
-      //   maze.toggleAuto();
+      maze.toggleAuto();
       this.setFast(this.fast);
       this.isAuto = !this.isAuto;
     },
@@ -73,7 +73,7 @@ export default Vue.extend({
     },
     setFast(fast: number) {
       this.fast = fast;
-      //   maze.autoSkip = this.fast;
+      maze.autoSkip = this.fast;
     },
     setSortComponent(mode: string) {
       if (maze != null) {

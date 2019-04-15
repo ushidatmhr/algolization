@@ -92,6 +92,18 @@ export default abstract class Maze {
 
 
     /**
+     * オート実行を切り替える
+     */
+    public toggleAuto(): void {
+        if (this.app.ticker.started) {
+            this.app.ticker.stop();
+        } else {
+            this.app.ticker.start();
+        }
+    }
+
+
+    /**
      * データを初期化
      * @param dataNum データ数
      */
