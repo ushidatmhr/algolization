@@ -1,6 +1,6 @@
 import { Color } from "./ColorFilter";
 
-type Data = {
+export type Data = {
     /** 壁有無フラグ */
     obstacle: boolean,
     /** グラフィック */
@@ -12,6 +12,11 @@ type Data = {
 export enum TileType {
     Load,
     Wall
+}
+
+export type Point = {
+    row: number,
+    column: number
 }
 
 export default class MazeDataSet {
@@ -54,10 +59,48 @@ export default class MazeDataSet {
      * @param column 列
      * @param flag true：壁あり、false：壁なし
      */
+    public setObstacleByPoint(point: Point, flag: boolean) {
+        this.setObstacle(point.row, point.column, flag);
+    }
+
+
+    /**
+     * 壁の有無を設定する
+     * @param row 行
+     * @param column 列
+     * @param flag true：壁あり、false：壁なし
+     */
     public setObstacle(row: number, column: number, flag: boolean) {
         this.mazeData[row][column].obstacle = flag;
 
         var color = flag ? Color.borderOn : Color.borderOff;
         this.mazeData[row][column].graphic.tint = color;
+    }
+
+
+    /**
+     * 壁か判定する
+     * @param point 位置
+     */
+    public isWall(point: Point) {
+        return this.mazeData[point.row][point.column].obstacle;
+    }
+
+
+    /**
+     * 指定箇所のデータを取得
+     * @param point 位置
+     */
+    public getByPoint(point: Point): Data {
+        return this.get(point.row, point.column);
+    }
+
+    /**
+     * 指定箇所のデータを取得
+     * @param row 行
+     * @param column 列
+     */
+    public get(row: number, column: number): Data {
+        return this.mazeData[row][column];
     }
 }

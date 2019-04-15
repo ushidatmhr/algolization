@@ -25,6 +25,7 @@
 import Vue from "vue";
 import VueRouter from "vue-router";
 import Maze from "../domain/renderer/Maze";
+import StickDownMaze from "../domain/renderer/StickDownMaze";
 
 var maze: Maze;
 
@@ -49,7 +50,7 @@ export default Vue.extend({
       this.isAuto = false;
     },
     next() {
-      //   maze.update();
+      maze.update();
     },
     reset() {
       maze.reset(this.dataNum);
@@ -93,7 +94,7 @@ export default Vue.extend({
         //   sort = new QuickSort("canvas", this.sortCompleted);
         //   break;
         default:
-          maze = new Maze("canvas", this.sortCompleted);
+          maze = new StickDownMaze("canvas", this.sortCompleted);
           break;
       }
 

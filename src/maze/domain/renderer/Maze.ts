@@ -9,6 +9,11 @@ export default abstract class Maze {
 
     protected mazeData: DataSet
 
+    protected mazeSize: {
+        row: number,
+        column: number
+    }
+
     /** ディスプレイオプション */
     protected displayOptions = {
         borderSize: 4
@@ -17,10 +22,18 @@ export default abstract class Maze {
     /** ソート処理のスキップ数 */
     public autoSkip: number;
 
+    private completedCallback: () => void;
+
+
     constructor(id: string, completedCallback: () => void) {
         this.app = new PIXI.Application(500, 500, { backgroundColor: Color.borderOn });
         document.getElementById(id).appendChild(this.app.view);
+
+        this.initAuto();
+
+        this.completedCallback = completedCallback;
     }
+
 
     /**
      * 初期化処理
@@ -29,7 +42,52 @@ export default abstract class Maze {
     public init(dataNum: number, skip: number): void {
         this.mazeData = new DataSet(dataNum);
         this.initData(dataNum);
+        this.mazeSize = {
+            row: dataNum,
+            column: dataNum
+        }
         this.autoSkip = skip;
+    }
+
+
+    /**
+ * オート処理を初期化
+ */
+    public initAuto(): void {
+
+        this.app.ticker.autoStart = false;
+        this.app.ticker.stop();
+        this.app.ticker.update();
+        this.app.ticker.add((delta) => {
+            for (var i = 0; i < this.autoSkip; i++) {
+                if (!this.next()) {
+                    this.app.ticker.stop();
+                    this.completedCallback();
+                }
+            }
+        });
+    }
+
+    public abstract next(): boolean;
+
+    public update() {
+        this.autoSkip = 1;
+        this.app.ticker.update();
+    }
+
+
+    /**
+     * リセット処理
+     * @param dataNum データ数 
+     */
+    public reset(dataNum: number): void {
+
+        this.app.ticker.stop();
+
+        this.mazeData = new MazeDataSet(dataNum);
+        this.app.stage.removeChildren();
+
+        this.init(dataNum, this.autoSkip);
     }
 
 
@@ -127,17 +185,5 @@ export default abstract class Maze {
     }
 
 
-    /**
-     * リセット処理
-     * @param dataNum データ数 
-     */
-    public reset(dataNum: number): void {
 
-        this.app.ticker.stop();
-
-        this.mazeData = new MazeDataSet(dataNum);
-        this.app.stage.removeChildren();
-
-        this.init(dataNum, this.autoSkip);
-    }
 }
