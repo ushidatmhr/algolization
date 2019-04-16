@@ -77,22 +77,13 @@ export default Vue.extend({
     },
     setSortComponent(mode: string) {
       if (maze != null) {
-        // maze.destory();
+        maze.destory();
       }
 
       switch (mode) {
-        // case "/BubleSort":
-        //   sort = new BubleSort("canvas", this.sortCompleted);
-        //   break;
-        // case "/InsertionSort":
-        //   sort = new InsertionSort("canvas", this.sortCompleted);
-        //   break;
-        // case "/SelectedSort":
-        //   sort = new SelectedSort("canvas", this.sortCompleted);
-        //   break;
-        // case "/QuickSort":
-        //   sort = new QuickSort("canvas", this.sortCompleted);
-        //   break;
+        case "/StickDown":
+          maze = new StickDownMaze("canvas", this.sortCompleted);
+          break;
         default:
           maze = new StickDownMaze("canvas", this.sortCompleted);
           break;

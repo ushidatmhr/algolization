@@ -10,7 +10,7 @@
 
     <div class="main-container">
       <nav class="menu">
-        <!-- <Menu v-bind:isOpen="menuOpen" v-on:applyTitle="title = $event"/> -->
+        <Menu v-bind:isOpen="menuOpen" v-on:applyTitle="title = $event"/>
       </nav>
       <section class="main">
         <Maze/>

@@ -197,5 +197,14 @@ export default abstract class Maze {
     }
 
 
+    /**
+     * 終了処理
+     */
+    public destory(): void {
+        this.app.view.parentElement.textContent = null;
+        this.app.destroy();
+        this.mazeData = null;
+    }
+
 
 }
