@@ -47,9 +47,6 @@ export default Vue.extend({
       left: -200px;
     }
 
-    &.close {
-    }
-
     &.open {
       transform: translateX(200px);
     }
