@@ -16,7 +16,7 @@ export default abstract class Maze {
 
     /** ディスプレイオプション */
     protected displayOptions = {
-        borderSize: 4
+        borderSize: 3
     }
 
     /** ソート処理のスキップ数 */
