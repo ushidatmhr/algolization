@@ -3,6 +3,7 @@ import DataSet, { Data, Point, Direction } from '../structure/DataSet';
 import MazeDataSet, { TileType } from '../structure/DataSet';
 import { Color } from '../structure/ColorFilter'
 import Maze from './Maze';
+import MazeUtils from '../Utils/MazeUtils';
 
 
 export default class StickDownMaze extends Maze {
@@ -67,7 +68,7 @@ export default class StickDownMaze extends Maze {
         var count = 0;
 
         do {
-            var direction = this.randomDirection();
+            var direction = MazeUtils.randomDirection();
             toPotin = this.moveCursorFor(direction);
 
             // 無限ループ防止用
@@ -98,7 +99,7 @@ export default class StickDownMaze extends Maze {
         var count = 0;
 
         do {
-            var direction = this.randomDirection();
+            var direction = MazeUtils.randomDirection();
             toPotin = this.moveCursorFor(direction);
 
             // 無限ループ防止用
@@ -127,32 +128,6 @@ export default class StickDownMaze extends Maze {
                 }
             }
         }
-    }
-
-
-    /**
-     * ランダムな方向を取得する
-     */
-    private randomDirection(): Direction {
-        var random = Math.floor(Math.random() * 4);
-
-        var direction: Direction;
-        switch (random) {
-            case 0:
-                direction = Direction.Top;
-                break;
-            case 1:
-                direction = Direction.Right;
-                break;
-            case 2:
-                direction = Direction.Bottom;
-                break;
-            case 3:
-                direction = Direction.Left;
-                break;
-        }
-
-        return direction;
     }
 
 
@@ -193,16 +168,4 @@ export default class StickDownMaze extends Maze {
         return toPoint;
     }
 
-
-    /**
-     * 現在位置からの指定方向が壁かどうか判定
-     * @param direction 指定方向
-     */
-    private checkWallDirection(direction: Direction): boolean {
-
-        var toPoint = this.moveCursorFor(direction);
-        var data = this.mazeData.getByPoint(toPoint);
-
-        return data.obstacle;
-    }
 }

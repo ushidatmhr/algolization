@@ -10,6 +10,7 @@ export default class RecursiveBacktrackingMaze extends Maze {
 
     /** ソート処理のステータス */
     private readonly STATUS = {
+        Dig: 0,
         Complete: 2
     }
 
@@ -34,7 +35,7 @@ export default class RecursiveBacktrackingMaze extends Maze {
     public init(dataNum: number, skip: number) {
         super.init(dataNum, skip);
 
-        // this.process = this.STATUS.FirstLine;
+        this.process = this.STATUS.Dig;
         this.cursor = {
             row: 1,
             column: 1
@@ -47,18 +48,21 @@ export default class RecursiveBacktrackingMaze extends Maze {
             return false;
         }
 
-        // switch (this.process) {
-        //     case this.STATUS.FirstLine:
-        //         this.doFirstLine();
-        //         break;
-        //     case this.STATUS.AfterLine:
-        //         this.doAfterLine();
-        //         break;
-        // }
+        switch (this.process) {
+            case this.STATUS.Dig:
+                this.dig();
+                break;
+            // case this.STATUS.AfterLine:
+            //     this.doAfterLine();
+            // break;
+        }
 
         return true;
     }
 
 
+    public dig() {
+
+    }
 
 }
