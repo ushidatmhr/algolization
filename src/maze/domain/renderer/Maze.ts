@@ -14,6 +14,9 @@ export default abstract class Maze {
         column: number
     }
 
+    /** 初期状態での壁の有無 */
+    protected initFillWall: boolean;
+
     /** ディスプレイオプション */
     protected displayOptions = {
         borderSize: 3
@@ -41,12 +44,13 @@ export default abstract class Maze {
      */
     public init(dataNum: number, skip: number): void {
         this.mazeData = new DataSet(dataNum);
-        this.initData(dataNum);
         this.mazeSize = {
             row: dataNum,
             column: dataNum
         }
         this.autoSkip = skip;
+
+        this.initData(dataNum);
     }
 
 
@@ -167,8 +171,9 @@ export default abstract class Maze {
 
                     // 外壁判定
                     var outer = (row == 0) || (row == massNum);
+                    let isWall = this.initFillWall || outer;
 
-                    this.mazeData.set(row * 2, (column * 2) + 1, borderGraph, outer, TileType.Wall);
+                    this.mazeData.set(row * 2, (column * 2) + 1, borderGraph, isWall, TileType.Wall);
 
                     this.app.stage.addChild(borderGraph);
                 }
@@ -186,8 +191,9 @@ export default abstract class Maze {
 
                     // 外壁判定
                     var outer = (column == 0) || (column == massNum);
+                    let isWall = this.initFillWall || outer;
 
-                    this.mazeData.set((row * 2) + 1, column * 2, borderGraph, outer, TileType.Wall);
+                    this.mazeData.set((row * 2) + 1, column * 2, borderGraph, isWall, TileType.Wall);
 
                     this.app.stage.addChild(borderGraph);
                 }

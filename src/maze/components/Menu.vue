@@ -7,7 +7,11 @@
         :class="[$route.path == '/StickDown' || $route.path == '/' ? 'active' : '']"
         @click="pushRoute('StickDown')"
       >棒倒し法</div>
-      <div class="menu-item" :class="[$route.path == '/' ? 'active' : '']" @click="pushRoute('')"></div>
+      <div
+        class="menu-item"
+        :class="[$route.path == '/RecursiveBacktrackingMaze' ? 'active' : '']"
+        @click="pushRoute('RecursiveBacktrackingMaze')"
+      >穴掘り法</div>
       <div class="menu-item" :class="[$route.path == '/' ? 'active' : '']" @click="pushRoute('')"></div>
       <div class="menu-item" :class="[$route.path == '/' ? 'active' : '']" @click="pushRoute('')"></div>
     </nav>

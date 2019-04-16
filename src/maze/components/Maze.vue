@@ -25,6 +25,7 @@
 import Vue from "vue";
 import VueRouter from "vue-router";
 import Maze from "../domain/renderer/Maze";
+import RecursiveBacktrackingMaze from "../domain/renderer/RecursiveBacktrackingMaze";
 import StickDownMaze from "../domain/renderer/StickDownMaze";
 
 var maze: Maze;
@@ -83,6 +84,9 @@ export default Vue.extend({
       switch (mode) {
         case "/StickDown":
           maze = new StickDownMaze("canvas", this.sortCompleted);
+          break;
+        case "/RecursiveBacktrackingMaze":
+          maze = new RecursiveBacktrackingMaze("canvas", this.sortCompleted);
           break;
         default:
           maze = new StickDownMaze("canvas", this.sortCompleted);

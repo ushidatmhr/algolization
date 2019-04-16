@@ -1,15 +1,9 @@
 import * as PIXI from 'pixi.js'
-import DataSet, { Data, Point } from '../structure/DataSet';
+import DataSet, { Data, Point, Direction } from '../structure/DataSet';
 import MazeDataSet, { TileType } from '../structure/DataSet';
 import { Color } from '../structure/ColorFilter'
 import Maze from './Maze';
 
-enum Direction {
-    Top,
-    Right,
-    Bottom,
-    Left
-}
 
 export default class StickDownMaze extends Maze {
 
@@ -25,6 +19,13 @@ export default class StickDownMaze extends Maze {
 
     /** カーソル位置 */
     private cursor: Point;
+
+
+    constructor(id: string, completedCallback: () => void) {
+        super(id, completedCallback);
+        this.initFillWall = false;
+    }
+
 
     /**
      * 初期化

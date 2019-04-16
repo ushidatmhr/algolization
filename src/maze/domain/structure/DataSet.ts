@@ -19,6 +19,13 @@ export type Point = {
     column: number
 }
 
+export enum Direction {
+    Top,
+    Right,
+    Bottom,
+    Left
+}
+
 export default class MazeDataSet {
 
     private mazeData: Data[][];
