@@ -6,7 +6,6 @@ import Maze from './Maze';
 import MazeUtils from '../Utils/MazeUtils';
 
 
-
 export default class RecursiveBacktrackingMaze extends Maze {
 
     /** ソート処理のステータス */
@@ -23,8 +22,10 @@ export default class RecursiveBacktrackingMaze extends Maze {
     private cursor: Point;
 
     /** 通り道 */
-    private route: Point[];
+    private routeHistory: Point[];
 
+    /** 移動ルートスタック */
+    private routeStack: Point[];
 
     constructor(id: string, completedCallback: () => void) {
         super(id, completedCallback);
@@ -45,11 +46,16 @@ export default class RecursiveBacktrackingMaze extends Maze {
             row: 1,
             column: 1
         }
-        this.route = [{
+        this.routeHistory = [{
             row: this.cursor.row,
             column: this.cursor.column
         }
         ];
+        this.routeStack = [{
+            row: this.cursor.row,
+            column: this.cursor.column
+        }];
+
     }
 
     public next(): boolean {
@@ -62,9 +68,9 @@ export default class RecursiveBacktrackingMaze extends Maze {
             case this.STATUS.Dig:
                 this.dig();
                 break;
-            // case this.STATUS.AfterLine:
-            //     this.doAfterLine();
-            // break;
+            case this.STATUS.Backtracking:
+                this.Backtracking();
+                break;
         }
 
         return true;
@@ -97,22 +103,28 @@ export default class RecursiveBacktrackingMaze extends Maze {
 
         // 進める方向がない場合は、遡るプロセスへ
         if (!existRoute) {
-            this.process = this.STATUS.Backtracking;
+            this.Backtracking();
         } else {
             this.mazeData.setObstacleByPoint(nextTo, false);
             this.mazeData.setTileColor(this.cursor, Color.tile);
             this.mazeData.setTileColor(nextPoint, Color.tileActive);
-            this.route.push(this.cursor);
+            this.routeHistory.push(nextPoint);
+            this.routeStack.push(nextPoint);
             this.cursor = nextPoint;
+
         }
     }
 
 
+    /**
+     * 指定位置が既に通ったルートかどうか判定する
+     * @param point 指定位置
+     */
     private isAlwaysRoute(point: Point): boolean {
 
         let isAlways = false;
 
-        this.route.forEach(r => {
+        this.routeHistory.forEach(r => {
             if (r.row == point.row && r.column == point.column) {
                 isAlways = true;
                 return;
@@ -120,6 +132,31 @@ export default class RecursiveBacktrackingMaze extends Maze {
         });
 
         return isAlways;
+    }
+
+
+    /**
+     * ルートを一つ逆戻り
+     */
+    public Backtracking() {
+
+        this.routeStack.pop();
+
+        // 戻りルートがなくなれば完了
+        if (this.routeStack.length == 0) {
+            this.mazeData.setTileColor(this.cursor, Color.tile);
+            this.process = this.STATUS.Complete;
+            return;
+        }
+
+        var prevPoint = this.routeStack[this.routeStack.length - 1];
+
+        this.mazeData.setTileColor(this.cursor, Color.tile);
+        this.mazeData.setTileColor(prevPoint, Color.tileActive);
+
+        this.cursor = prevPoint;
+
+        this.process = this.STATUS.Dig;
     }
 
 }
