@@ -3,6 +3,7 @@ import DataSet, { Data, Point, Direction } from '../structure/DataSet';
 import MazeDataSet, { TileType } from '../structure/DataSet';
 import { Color } from '../structure/ColorFilter'
 import Maze from './Maze';
+import MazeUtils from '../Utils/MazeUtils';
 
 
 
@@ -11,6 +12,7 @@ export default class RecursiveBacktrackingMaze extends Maze {
     /** ソート処理のステータス */
     private readonly STATUS = {
         Dig: 0,
+        Backtracking: 1,
         Complete: 2
     }
 
@@ -19,6 +21,9 @@ export default class RecursiveBacktrackingMaze extends Maze {
 
     /** カーソル位置 */
     private cursor: Point;
+
+    /** 通り道 */
+    private route: Point[];
 
 
     constructor(id: string, completedCallback: () => void) {
@@ -40,6 +45,11 @@ export default class RecursiveBacktrackingMaze extends Maze {
             row: 1,
             column: 1
         }
+        this.route = [{
+            row: this.cursor.row,
+            column: this.cursor.column
+        }
+        ];
     }
 
     public next(): boolean {
@@ -63,6 +73,53 @@ export default class RecursiveBacktrackingMaze extends Maze {
 
     public dig() {
 
+        let nextTo: Point;
+        let nextPoint: Point;
+        let existRoute: boolean = false;
+
+        let shuffleDirections = MazeUtils.shuffleDirection();
+        for (var i = 0; i < shuffleDirections.length; i++) {
+            let direction: Direction = shuffleDirections[i];
+            nextTo = MazeUtils.getMovePoint(this.cursor, direction);
+            nextPoint = MazeUtils.moveLoadPoint(this.cursor, direction);
+
+            // 進行方向が、壁がない or 外壁 or 既に通ったルートの場合は採用しない
+            if (!this.mazeData.isWall(nextTo)
+                || this.mazeData.isOuterWall(nextTo)
+                || this.isAlwaysRoute(nextPoint)) {
+                continue;
+
+            } else {
+                existRoute = true;
+                break;
+            }
+        };
+
+        // 進める方向がない場合は、遡るプロセスへ
+        if (!existRoute) {
+            this.process = this.STATUS.Backtracking;
+        } else {
+            this.mazeData.setObstacleByPoint(nextTo, false);
+            // this.mazeData.setTileColor(this.cursor, Color.tile);
+            // this.mazeData.setTileColor(nextPoint, Color.tile);
+            this.route.push(this.cursor);
+            this.cursor = nextPoint;
+        }
+    }
+
+
+    private isAlwaysRoute(point: Point): boolean {
+
+        let isAlways = false;
+
+        this.route.forEach(r => {
+            if (r.row == point.row && r.column == point.column) {
+                isAlways = true;
+                return;
+            }
+        });
+
+        return isAlways;
     }
 
 }

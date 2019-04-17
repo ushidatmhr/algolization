@@ -51,6 +51,8 @@ export default abstract class Maze {
         this.autoSkip = skip;
 
         this.initData(dataNum);
+
+        this.app.render();
     }
 
 
@@ -121,7 +123,6 @@ export default abstract class Maze {
         this.initMassData(massNum, massSize);
         this.initBorderData(massNum, massSize);
 
-        this.app.render();
     }
 
 
@@ -139,8 +140,10 @@ export default abstract class Maze {
                 massGraph.drawRect(0, 0, massSize.width, massSize.height);
                 massGraph.endFill();
 
-                massGraph.x = (massSize.width * row) + this.displayOptions.borderSize * (row + 1);
-                massGraph.y = (massSize.height * col) + this.displayOptions.borderSize * (col + 1);
+                massGraph.x = (massSize.width * col) + this.displayOptions.borderSize * (col + 1);
+                massGraph.y = (massSize.height * row) + this.displayOptions.borderSize * (row + 1);
+
+                this.mazeData.set((row * 2) + 1, (col * 2) + 1, massGraph, false, TileType.Load);
 
                 this.app.stage.addChild(massGraph);
             }

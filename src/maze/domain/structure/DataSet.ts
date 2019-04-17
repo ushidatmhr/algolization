@@ -56,7 +56,9 @@ export default class MazeDataSet {
             type: type
         };
 
-        this.setObstacle(row, column, obstacle);
+        if (type == TileType.Wall) {
+            this.setObstacle(row, column, obstacle);
+        }
     }
 
 
@@ -109,5 +111,22 @@ export default class MazeDataSet {
      */
     public get(row: number, column: number): Data {
         return this.mazeData[row][column];
+    }
+
+
+    public setTileColor(point: Point, color: number) {
+        this.mazeData[point.row][point.column].graphic.tint = color;
+    }
+
+
+    /**
+     * 指定位置が外周の壁かどうか判定する
+     * @param point 指定位置
+     */
+    public isOuterWall(point: Point) {
+        if (point.row == 0 || point.row == this.mazeData.length - 1
+            || point.column == 0 || point.column == this.mazeData[1].length - 1) {
+            return true;
+        }
     }
 }
