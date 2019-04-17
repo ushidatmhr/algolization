@@ -136,9 +136,11 @@ export default abstract class Maze {
         for (var row = 0; row < massNum; row++) {
             for (var col = 0; col < massNum; col++) {
                 var massGraph = new PIXI.Graphics();
-                massGraph.beginFill(Color.tile, 1);
+                massGraph.beginFill(0xFFFFFF, 1);
                 massGraph.drawRect(0, 0, massSize.width, massSize.height);
                 massGraph.endFill();
+
+                massGraph.tint = Color.tile;
 
                 massGraph.x = (massSize.width * col) + this.displayOptions.borderSize * (col + 1);
                 massGraph.y = (massSize.height * row) + this.displayOptions.borderSize * (row + 1);

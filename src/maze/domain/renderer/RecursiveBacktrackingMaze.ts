@@ -100,8 +100,8 @@ export default class RecursiveBacktrackingMaze extends Maze {
             this.process = this.STATUS.Backtracking;
         } else {
             this.mazeData.setObstacleByPoint(nextTo, false);
-            // this.mazeData.setTileColor(this.cursor, Color.tile);
-            // this.mazeData.setTileColor(nextPoint, Color.tile);
+            this.mazeData.setTileColor(this.cursor, Color.tile);
+            this.mazeData.setTileColor(nextPoint, Color.tileActive);
             this.route.push(this.cursor);
             this.cursor = nextPoint;
         }
