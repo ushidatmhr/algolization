@@ -12,7 +12,9 @@
 	// Add the IDs of extensions you want installed when the container is created.
 	"extensions": [
 		"dbaeumer.vscode-eslint",
-		"donjayamanne.githistory"
+		"donjayamanne.githistory",
+		"octref.vetur",
+		"DigitalBrainstem.javascript-ejs-support"
 	],
 	// Use 'forwardPorts' to make a list of ports inside the container available locally.
 	// "forwardPorts": [],

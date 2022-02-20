@@ -1,5 +1,5 @@
 const path = require('path');
-const VueLoaderPlugin = require('vue-loader/lib/plugin')
+const VueLoaderPlugin = require('vue-loader/dist/plugin').default
 const HtmlWebpackPlugin = require('html-webpack-plugin')
 
 module.exports = {
@@ -41,13 +41,6 @@ module.exports = {
                 loader: 'babel-loader'
             },
             {
-                test: /\.ejs$/,
-                use: [
-                    'html-loader',
-                    'ejs-html-loader'
-                ]
-            },
-            {
                 test: /\.(png|jpg|gif|svg)$/i,
                 loader: 'url-loader'
             }
@@ -57,18 +50,21 @@ module.exports = {
         new VueLoaderPlugin(),
         new HtmlWebpackPlugin({
             filename: 'index.html',
-            template: './src/index.ejs',
-            inject: false
+            template: './src/index.html',
+            inject: false,
+            minify: true
         }),
         new HtmlWebpackPlugin({
             filename: 'sort.html',
-            template: './src/sort/sort.ejs',
-            inject: false
+            template: './src/sort/sort.html',
+            inject: false,
+            minify: true
         }),
         new HtmlWebpackPlugin({
             filename: 'maze.html',
-            template: './src/maze/maze.ejs',
-            inject: false
+            template: './src/maze/maze.html',
+            inject: false,
+            minify: true
         })
     ]
 }

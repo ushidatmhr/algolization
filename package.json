@@ -22,8 +22,6 @@
     "@types/pixi.js": "^4.8.9",
     "babel-loader": "^8.2.3",
     "css-loader": "^6.6.0",
-    "ejs": "^3.1.6",
-    "ejs-html-loader": "^4.0.1",
     "html-loader": "^3.1.0",
     "html-webpack-plugin": "^5.5.0",
     "node-sass": "^7.0.1",
