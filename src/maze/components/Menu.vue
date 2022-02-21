@@ -2,38 +2,27 @@
   <div class="menu-container" :class="isOpen ? 'open' : 'close'">
     <nav class="side-menu">
       <div class="head">MAZE</div>
-      <div
-        class="menu-item"
-        :class="[$route.path == '/StickDown' || $route.path == '/' ? 'active' : '']"
-        @click="pushRoute('StickDown')"
-      >棒倒し法</div>
-      <div
-        class="menu-item"
-        :class="[$route.path == '/RecursiveBacktrackingMaze' ? 'active' : '']"
-        @click="pushRoute('RecursiveBacktrackingMaze')"
-      >穴掘り法</div>
-      <div class="menu-item" :class="[$route.path == '/' ? 'active' : '']" @click="pushRoute('')"></div>
-      <div class="menu-item" :class="[$route.path == '/' ? 'active' : '']" @click="pushRoute('')"></div>
+      <router-link class="menu-item" :class="[$route.query.id == 'StickDown' ? 'active' : '']" :to="{ name: 'home', query: { id: 'StickDown' } }">棒倒し法</router-link>
+      <router-link class="menu-item" :class="[$route.query.id == 'RecursiveBacktrackingMaze' ? 'active' : '']" :to="{ name: 'home', query: { id: 'RecursiveBacktrackingMaze' } }">穴掘り法</router-link>
     </nav>
   </div>
 </template>
 
 <script lang="ts">
-import Vue from "vue";
+import { defineComponent } from "vue";
 
-export default Vue.extend({
+export default defineComponent({
   props: {
-    isOpen: Boolean
+    isOpen: Boolean,
   },
   data() {
     return {};
   },
   methods: {
     pushRoute(route: string) {
-      this.$router.push(route);
       this.$emit("applyTitle", route);
-    }
-  }
+    },
+  },
 });
 </script>
 
@@ -80,9 +69,11 @@ export default Vue.extend({
     .menu-item {
       height: 30px;
       border-bottom: 1px solid #cfd8dc;
+      color: white;
       line-height: 30px;
       cursor: pointer;
       user-select: none;
+      text-decoration: none;
 
       &:hover {
         background-color: #90a4ae;

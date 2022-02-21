@@ -7,7 +7,7 @@ module.exports = {
     entry: {
         app: './src/app.ts',
         "sort/sort": './src/sort/app-sort.ts',
-        maze: './src/maze/app-maze.ts'
+        "maze/maze": './src/maze/app-maze.ts'
     },
     output: {
         path: path.resolve(__dirname, '../public'),
@@ -61,7 +61,7 @@ module.exports = {
             minify: true
         }),
         new HtmlWebpackPlugin({
-            filename: 'maze.html',
+            filename: 'maze/index.html',
             template: './src/maze/maze.html',
             inject: false,
             minify: true

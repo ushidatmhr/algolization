@@ -1,6 +1,5 @@
 import { createApp } from 'vue'
 import { createRouter, createWebHistory, RouteRecordRaw } from "vue-router";
-// import VueRouter, { RouteRecordRaw } from "vue-router";
 import SortApp from './components/SortApp.vue'
 import Sort from './components/Sort.vue'
 import Menu from './components/Menu.vue'
