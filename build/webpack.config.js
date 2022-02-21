@@ -6,7 +6,7 @@ module.exports = {
     mode: 'development',
     entry: {
         app: './src/app.ts',
-        sort: './src/sort/app-sort.ts',
+        "sort/sort": './src/sort/app-sort.ts',
         maze: './src/maze/app-maze.ts'
     },
     output: {
@@ -41,7 +41,7 @@ module.exports = {
                 loader: 'babel-loader'
             },
             {
-                test: /\.(png|jpg|gif|svg)$/i,
+                test: /\.(png|jpg|gif|svg)$/,
                 loader: 'url-loader'
             }
         ]
@@ -55,7 +55,7 @@ module.exports = {
             minify: true
         }),
         new HtmlWebpackPlugin({
-            filename: 'sort.html',
+            filename: 'sort/index.html',
             template: './src/sort/sort.html',
             inject: false,
             minify: true
@@ -66,5 +66,8 @@ module.exports = {
             inject: false,
             minify: true
         })
-    ]
+    ],
+    watchOptions: {
+        poll: true,
+    }
 }

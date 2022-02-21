@@ -101,11 +101,13 @@ export default abstract class Sort {
     /**
      * オート実行を切り替える
      */
-    public toggleAuto(): void {
-        if (this.app.ticker.started) {
-            this.app.ticker.stop();
-        } else {
+    public setAutoMode(auto: boolean): void {
+
+        if (auto) {
             this.app.ticker.start();
+        } else if (this.app.ticker.started) {
+            this.app.ticker.stop();
+
         }
     }
 

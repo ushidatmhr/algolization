@@ -2,41 +2,39 @@
   <div class="container">
     <header class="header">
       <div class="sub-area">
-        <img src="../../../images/bars-solid.svg" @click="openMenu">
+        <img src="../../../images/bars-solid.svg" @click="openMenu" />
       </div>
-      <div class="main-area">{{title}}</div>
+      <div class="main-area">{{ $route.query.id }}</div>
       <div class="sub-area"></div>
     </header>
 
     <div class="main-container">
       <nav class="menu">
-        <Menu v-bind:isOpen="menuOpen" v-on:applyTitle="title = $event"/>
+        <Menu v-bind:isOpen="menuOpen" v-on:applyTitle="title = $event" />
       </nav>
       <section class="main">
-        <Sort/>
+        <Sort />
       </section>
     </div>
   </div>
 </template>
 
 <script lang="ts">
-import Vue from "vue";
+import { defineComponent } from "vue";
 
-export default Vue.extend({
+export default defineComponent({
+  setup() {},
   data() {
     return {
       menuOpen: false,
-      title: String
+      title: String,
     };
-  },
-  mounted() {
-    this.title = this.$route.path.replace("/", "");
   },
   methods: {
     openMenu() {
       this.menuOpen = !this.menuOpen;
-    }
-  }
+    },
+  },
 });
 </script>
 

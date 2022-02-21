@@ -2,46 +2,30 @@
   <div class="menu-container" :class="isOpen ? 'open' : 'close'">
     <nav class="side-menu">
       <div class="head">SORT</div>
-      <div
-        class="menu-item"
-        :class="[$route.path == '/BubbleSort' || $route.path == '/' ? 'active' : '']"
-        @click="pushRoute('BubbleSort')"
-      >Bubble Sort</div>
-      <div
-        class="menu-item"
-        :class="[$route.path == '/InsertionSort' ? 'active' : '']"
-        @click="pushRoute('InsertionSort')"
-      >Insert Sort</div>
-      <div
-        class="menu-item"
-        :class="[$route.path == '/SelectedSort' ? 'active' : '']"
-        @click="pushRoute('SelectedSort')"
-      >Selected Sort</div>
-      <div
-        class="menu-item"
-        :class="[$route.path == '/QuickSort' ? 'active' : '']"
-        @click="pushRoute('QuickSort')"
-      >Quick Sort</div>
+      <router-link class="menu-item" :class="[$route.query.id == 'BubbleSort' ? 'active' : '']" :to="{ name: 'home', query: { id: 'BubbleSort' } }">BubbleSort</router-link>
+      <router-link class="menu-item" :class="[$route.query.id == 'InsertionSort' ? 'active' : '']" :to="{ name: 'home', query: { id: 'InsertionSort' } }">InsertionSort</router-link>
+      <router-link class="menu-item" :class="[$route.query.id == 'SelectedSort' ? 'active' : '']" :to="{ name: 'home', query: { id: 'SelectedSort' } }">SelectedSort</router-link>
+      <router-link class="menu-item" :class="[$route.query.id == 'QuickSort' ? 'active' : '']" :to="{ name: 'home', query: { id: 'QuickSort' } }">QuickSort</router-link>
     </nav>
   </div>
 </template>
 
 <script lang="ts">
-import Vue from "vue";
+import { defineComponent } from "vue";
 
-export default Vue.extend({
+export default defineComponent({
+  setup() {},
   props: {
-    isOpen: Boolean
+    isOpen: Boolean,
   },
   data() {
     return {};
   },
   methods: {
     pushRoute(route: string) {
-      this.$router.push(route);
       this.$emit("applyTitle", route);
-    }
-  }
+    },
+  },
 });
 </script>
 
@@ -91,9 +75,11 @@ export default Vue.extend({
     .menu-item {
       height: 30px;
       border-bottom: 1px solid #cfd8dc;
+      color: white;
       line-height: 30px;
       cursor: pointer;
       user-select: none;
+      text-decoration: none;
 
       &:hover {
         background-color: #90a4ae;
